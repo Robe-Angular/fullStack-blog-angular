@@ -1,0 +1,22 @@
+<div class="loading" *ngIf="!category">
+	Cargando...
+</div>
+<div class="container-fluid mt-3" *ngIf="category">
+	<h1>{{category.name}}</h1>
+	<hr>
+
+<div class="alert alert-warning" *ngIf="posts.length == 0">
+	No hay posts en esta categoría
+</div>
+
+<div class="container-fluid mt-3" *ngIf="posts.length > 0">
+	<hr>
+	<!--Listado De entradas-->
+	<post-list 	[posts]="posts"
+				[identity]="identity"
+				[url]="url"
+				(eliminar) = "deletePost($event)"></post-list> 
+
+</div>
+
+</div>
