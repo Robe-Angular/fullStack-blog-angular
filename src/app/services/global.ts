@@ -1,3 +1,3 @@
 export var global= {
-	url: 'http://api-rest-laravel.com.devel/api/'
+	url: 'http://localhost:8000/api/'
 }
