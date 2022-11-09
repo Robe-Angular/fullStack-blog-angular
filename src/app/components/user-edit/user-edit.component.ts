@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import {global} from '../../services/global';
+import { Editor } from 'ngx-editor';
+import { Toolbar } from 'ngx-editor/public_api';
 
 @Component({
   selector: 'app-user-edit',
@@ -9,7 +11,7 @@ import {global} from '../../services/global';
   styleUrls: ['./user-edit.component.css'],
   providers: [UserService]
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit,OnDestroy {
 	
 	public page_title: string;
 	public user: User;
@@ -18,14 +20,8 @@ export class UserEditComponent implements OnInit {
 	public token;
 	public url;
 	public resetVar = true;
-
-	public froala_options: Object = {
-	    charCounterCount: true,
-	    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
-	    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
-	    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
-	    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
-	  };
+	public editor: Editor;
+	public toolbar:Toolbar;
 
   	public afuConfig = {
 	    multiple: false,
@@ -55,8 +51,22 @@ export class UserEditComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = global.url;
+		this.editor = new Editor();
+		this.toolbar = [			
+			// default value
+			['bold', 'italic'],
+			['underline', 'strike'],
+			['code', 'blockquote'],
+			['ordered_list', 'bullet_list'],
+			[{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+			['link', 'image'],
+			['text_color', 'background_color'],
+			['align_left', 'align_center', 'align_right', 'align_justify'],
+			['horizontal_rule', 'format_clear']			
+		]
 
 		//Rellenar objeto de Usuario
+		let identityDescription = this.identity.description == null ? "": this.identity.description;
 		this.user = new User(
 			this.identity.sub,
 			this.identity.name,
@@ -64,13 +74,18 @@ export class UserEditComponent implements OnInit {
 			this.identity.role,
 			this.identity.email,
 			'',
-			this.identity.description,
+			identityDescription,
 			this.identity.image
 		)
+		
 	}
 
 	ngOnInit(): void {
 
+	}
+
+	ngOnDestroy(): void {
+		this.editor.destroy();
 	}
 	
 	onSubmit(form){

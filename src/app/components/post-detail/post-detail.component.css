@@ -1,0 +1,11 @@
+.post-wrapper{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+.post-content{
+    display: inline-block;
+    text-align: left;
+    width: 90%;
+}

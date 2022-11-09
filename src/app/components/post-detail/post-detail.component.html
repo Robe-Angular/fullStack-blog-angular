@@ -10,7 +10,9 @@
 		{{post.category.name}}-<a [routerLink]="['/perfil',post.user.id]">{{post.user.name}} {{post.user.surname}}</a>
 	</p>
 	<hr/>
-	<p [innerHtml]="post.content">
-		{{post.content}}
-	</p>
+	<div class="post-wrapper" >
+		<div class="post-content" [innerHtml]="post.content | sanitizeHTML">
+			{{post.content}}
+		</div>		
+	</div>
 </div>

@@ -16,7 +16,7 @@
 		Los datos no se han guardado
 	</div>
 	<!--Formulario de crar entrada-->
-	<form class="col-md-5 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
+	<form class="col-md-12 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
 		<div class="form-group">
 			<label for="title">Título</label>
 			<input type="tex" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
@@ -26,10 +26,16 @@
 		</div>
 		<div>
 			<label for="content">Contenido</label>
-			<textarea [froalaEditor]="froala_options" name="content" #content="ngModel" [(ngModel)]="post.content" required></textarea>
-			<small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
-				El contenido no es válido
-			</small>
+			<div id="editor-wrapper">
+				<div id="editor">
+					<ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"></ngx-editor-menu>
+					<ngx-editor [editor]="editor" name="content" #content="ngModel" [(ngModel)]="post.content" required></ngx-editor>
+					<small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+						El contenido no es válido
+					</small>
+				</div>		
+			</div>
+			
 		</div>
 		<div class="form-group">
 			<label for="category_id">
@@ -40,8 +46,6 @@
 					{{category.name}}
 				</option>
 			</select>
-
-			
 		</div>
 		<div class="form-group">
 			<label for="image">Image</label>

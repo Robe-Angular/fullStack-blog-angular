@@ -1,0 +1,17 @@
+#editor-wrapper{
+    display: block;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+}
+#editor{
+    display: inline-block;
+    text-align: left;
+    width: 90%;
+    min-height: 400px;
+    overflow: hidden;
+}
+::ng-deep .NgxEditor__Content{
+    min-height: 400px;
+    overflow: auto;
+}
