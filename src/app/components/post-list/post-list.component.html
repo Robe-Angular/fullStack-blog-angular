@@ -14,7 +14,7 @@
 					<!--Botones de acción-->
 					<div class="post-buttons mt-3">
 						<a [routerLink]="['/entrada',post.id]" class="btn btn-success mr-2">Leer</a>
-						<span *ngIf="identity && identity.sub == post.user_id">
+						<span *ngIf="identity && identity.sub == 1">
 							<a [routerLink]="['/editar-entrada', post.id]" class="btn btn-warning mr-2">Editar</a>
 							 
 							<!-- Button trigger modal -->

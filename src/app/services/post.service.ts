@@ -53,4 +53,25 @@ export class PostService{
 			.set('Authorization', token);
 		return this._http.delete(this.url + 'post/' + id, {headers: headers});	
 	}
+
+	registerImage(token, imageToRegister):Observable<any>{
+		let json = JSON.stringify(imageToRegister);
+		let params = "json="+encodeURIComponent(json);
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.post(this.url + 'image/save', params, {headers: headers});
+	}
+
+	getImagesByPost(token, postId):Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.get(this.url + 'images-by-post/'+postId, {headers: headers});
+	}
+
+	setMainImage(token,imageId){
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.get(this.url + 'image/'+imageId+'/edit', {headers: headers});
+	}
+	
 }

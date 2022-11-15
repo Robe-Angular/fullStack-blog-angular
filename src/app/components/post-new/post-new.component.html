@@ -47,10 +47,25 @@
 				</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="image">Image</label>
-			<div *ngIf="is_edit && post.image">
-				<img src="{{url + 'post/image/' + post.image}}" class="avatar_edit"/>
+		<div class="form-group" *ngIf="is_edit && post.id">
+			<label for="image">Images</label>
+			<div *ngIf="is_edit">
+				<div *ngFor="let imageOnPost of imagesOnPost" class="imageOnPost">
+					<img src="{{url + 'post/image/' + imageOnPost.description}}" class="avatar_edit"/>
+					<div class="clearfix">
+
+					</div>
+					<button type="button" class="btn btn-danger ml-2">
+						Borrar
+					</button>
+					<button type="button" class="btn btn-primary ml-2" [class.btn-info]="imageOnPost.id==post.image" (click)="setMainImage(imageOnPost.id)">
+						M
+					</button>
+					<button type="button" class="btn btn-warning ml-2">
+						Descripción
+					</button>
+				</div>
+				
 			</div>
 			<angular-file-uploader
 					[config]="afuConfig"

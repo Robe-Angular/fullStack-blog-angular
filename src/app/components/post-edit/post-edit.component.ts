@@ -13,6 +13,7 @@ import { SafeHtml } from '@angular/platform-browser';
 @Component({
   selector: 'app-post-edit',
   templateUrl: '../post-new/post-new.component.html',
+  styleUrls: ['../post-new/post-new.component.css'],
   providers: [UserService, CategoryService, PostService]
 })
 export class PostEditComponent implements OnInit, OnDestroy {
@@ -28,13 +29,15 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public editor: Editor;
 	public toolbar: Toolbar;
 	public securityTrust: SafeHtml;
+	public imagesOnPost:Array<any>;
+	public mainImage:string;
 
 	public afuConfig = {
 	    multiple: false,
 	    formatsAllowed: ".jpg,.png,.gif,.jpeg",
 	    maxSize: "50",
 	    uploadAPI:  {
-	      url:global.url+"post/upload",
+	      url:global.url+"post/upload/",
 	      method:"POST",
 	      headers: {
 	     "Authorization" : this._userService.getToken()
@@ -45,7 +48,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	    hideResetBtn: true,
 	    hideSelectBtn: false,
 	    fileNameIndex: true,
-	    attachPinText: 'Sube la imagen de la entrada'
+	    attachPinText: 'Sube una imagen'
 	};
 
 	constructor(
@@ -73,6 +76,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 			['align_left', 'align_center', 'align_right', 'align_justify'],
 			['horizontal_rule', 'format_clear']			
 		]
+		this.imagesOnPost = []
 	}
 
 	ngOnInit(): void {
@@ -125,6 +129,17 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	imageUpload(data){
 		let image_data = (JSON.parse(data.response));
 		this.post.image = image_data.image;
+		let imageToRegister = {
+			'image_name': this.post.image,
+			'post_id': this.post.id
+		}
+		this._postService.registerImage(this.token,imageToRegister).subscribe(
+			response => {
+				console.log(response)
+			},error => {
+
+			}
+		)
 	}
 
 	getPost(){
@@ -135,12 +150,21 @@ export class PostEditComponent implements OnInit, OnDestroy {
 			this._postService.getPost(id).subscribe(
 				response => {
 					if(response.status = 'success'){
-
+						
 						this.post = response.post;
-						console.log(this.post);
-						if(this.post.user_id != this.identity.sub){
+						
+						if(this.identity.sub != 1){
 							this._router.navigate(['/inicio']);
+						}else{
+							this._postService.getImagesByPost(this.token,this.post.id).subscribe(
+								response =>{
+									this.imagesOnPost = response.images;
+								},error => {
+									this._router.navigate(['inicio']);
+								}
+							);
 						}
+
 						
 					}else{
 						this._router.navigate(['/inicio']);
@@ -152,6 +176,18 @@ export class PostEditComponent implements OnInit, OnDestroy {
 				}	
 			)
 		});
+		
 	}
+	setMainImage(imageId){
+		this._postService.setMainImage(this.token,imageId).subscribe(
+			response => {
+				this.getPost();
+			},error => {
+				console.log(error);
+			}
+		);
+	}
+
+
 
 }

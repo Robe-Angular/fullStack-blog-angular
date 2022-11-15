@@ -32,7 +32,7 @@ export class PostNewComponent implements OnInit,OnDestroy {
 	    maxSize: "50",
 	    uploadAPI:  {
 	      url:global.url+"post/upload",
-	      method:"POST",
+	      method:"PUT",
 	      headers: {
 	     "Authorization" : this._userService.getToken()
 	      }
@@ -74,7 +74,7 @@ export class PostNewComponent implements OnInit,OnDestroy {
 	ngOnInit(): void {
 		this.getCategories();
 		this.post = new Post(1, this.identity.sub, 1, '', '', null, null);
-		console.log(this.post);
+		
 	}
 	
 	ngOnDestroy(): void {
