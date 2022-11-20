@@ -21,6 +21,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public identity;
 	public token;
 	public post: Post;
+	public postLoaded: boolean;
 	public categories;
 	public resetVar:string;
 	public status;
@@ -75,8 +76,10 @@ export class PostEditComponent implements OnInit, OnDestroy {
 			['text_color', 'background_color'],
 			['align_left', 'align_center', 'align_right', 'align_justify'],
 			['horizontal_rule', 'format_clear']			
-		]
-		this.imagesOnPost = []
+		];
+		this.imagesOnPost = [];
+		this.postLoaded = false;		
+
 	}
 
 	ngOnInit(): void {
@@ -135,7 +138,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		}
 		this._postService.registerImage(this.token,imageToRegister).subscribe(
 			response => {
-				console.log(response)
+				this.getPost();
 			},error => {
 
 			}
@@ -152,7 +155,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 					if(response.status = 'success'){
 						
 						this.post = response.post;
-						
+						this.postLoaded = true;
 						if(this.identity.sub != 1){
 							this._router.navigate(['/inicio']);
 						}else{
@@ -187,7 +190,23 @@ export class PostEditComponent implements OnInit, OnDestroy {
 			}
 		);
 	}
-
-
+	submitDescription(imageId,imageOnPost){
+		this._postService.changeImageDescription(this.token,imageId,imageOnPost).subscribe(
+			response => {
+				this.getPost();
+			},error => {
+				console.log(error);
+			}
+		)
+	}
+	deleteImage(imageOPostId){
+		this._postService.deleteImage(this.token,imageOPostId).subscribe(
+			response => {
+				this.getPost();
+			},error => {
+				console.log(error);
+			}
+		);
+	}
 
 }

@@ -23,9 +23,9 @@ import { IdentityGuard } from './services/identity.guard';
 const appRoutes: Routes = [
 	{path: '', component: HomeComponent},
 	{path: 'inicio', component: HomeComponent},
-	{path: 'login', component: LoginComponent},
+	{path: 'hola-admin-tqm', component: LoginComponent},
 	{path: 'logout/:sure', component: LoginComponent},
-	{path: 'registro', component: RegisterComponent},
+	//{path: 'registro', component: RegisterComponent},
 	{path: 'ajustes', component: UserEditComponent, canActivate: [IdentityGuard]},
 	{path: 'crear-categoria', component: CategoryNewComponent, canActivate: [IdentityGuard]},
 	{path: 'crear-entrada', component: PostNewComponent, canActivate: [IdentityGuard]},

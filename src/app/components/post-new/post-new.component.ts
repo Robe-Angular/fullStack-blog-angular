@@ -25,6 +25,7 @@ export class PostNewComponent implements OnInit,OnDestroy {
 	public is_edit;
 	public editor:Editor;
 	public toolbar: Toolbar;
+	public postLoaded:boolean;
 
 	public afuConfig = {
 	    multiple: false,
@@ -68,7 +69,8 @@ export class PostNewComponent implements OnInit,OnDestroy {
 			['text_color', 'background_color'],
 			['align_left', 'align_center', 'align_right', 'align_justify'],
 			['horizontal_rule', 'format_clear']			
-		]
+		];
+		this.postLoaded = true;
 	}
 
 	ngOnInit(): void {

@@ -4,7 +4,7 @@
 	<p *ngIf="!is_edit">
 		Añade un nuevo artículo al Blog
 	</p>
-	<p *ngIf="is_edit && post">
+	<p *ngIf="is_edit && post && postLoaded">
 		Modifica el post: {{post.title}}
 	</p>
 	<hr/>
@@ -16,7 +16,9 @@
 		Los datos no se han guardado
 	</div>
 	<!--Formulario de crar entrada-->
-	<form class="col-md-12 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
+	<form class="col-md-12 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)"
+		*ngIf="postLoaded"
+	>
 		<div class="form-group">
 			<label for="title">Título</label>
 			<input type="tex" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
@@ -55,15 +57,16 @@
 					<div class="clearfix">
 
 					</div>
-					<button type="button" class="btn btn-danger ml-2">
+					<button type="button" class="btn btn-danger ml-2" (click)="deleteImage(imageOnPost.id)">
 						Borrar
 					</button>
 					<button type="button" class="btn btn-primary ml-2" [class.btn-info]="imageOnPost.id==post.image" (click)="setMainImage(imageOnPost.id)">
 						M
 					</button>
-					<button type="button" class="btn btn-warning ml-2">
+					<button type="button" class="btn btn-warning ml-2" (click)="submitDescription(imageOnPost.id,imageOnPost)">						
 						Descripción
 					</button>
+					<input type="text" [(ngModel)]="imageOnPost.description" [ngModelOptions]="{standalone: true}"/>
 				</div>
 				
 			</div>

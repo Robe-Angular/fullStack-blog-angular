@@ -1,3 +1,14 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body .progress-spinner circle, .mat-spinner circle {
+	stroke: green !important;
+}
+body .mat-progress-spinner{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 10;
+}
 /* You can add global styles to this file, and also import other style files */
 .clearfix{
 	clear: both;

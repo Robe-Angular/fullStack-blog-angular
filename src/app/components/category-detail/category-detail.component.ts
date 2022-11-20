@@ -16,6 +16,7 @@ export class CategoryDetailComponent implements OnInit {
 	public page_title: string;
 	public category: Category;
 	public posts: any;
+	public postsLoaded: Boolean;
 	public url: string;
 	public identity;
 	public token;
@@ -32,6 +33,7 @@ export class CategoryDetailComponent implements OnInit {
 		this.posts = [];
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken(); 
+		this.postsLoaded = false;
 	}
 
 	ngOnInit(): void {
@@ -50,6 +52,7 @@ export class CategoryDetailComponent implements OnInit {
 								if(response.status == 'success'){
 
 									this.posts = response.posts;
+									this.postsLoaded = true;
 								}else{
 									this._router.navigate(['/inicio']);
 								}

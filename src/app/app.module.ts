@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { NgxEditorModule } from 'ngx-editor';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+
 
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import  { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { IdentityGuard } from './services/identity.guard';
 import { UserService } from './services/user.service';
@@ -26,6 +28,9 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { SanitizeHTMLPipe } from './pipes/sanitize-html.pipe';
 import { ShortStringPipe } from './pipes/short-string.pipe';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NetworkInterceptor } from './interceptors/network.interceptor';
+import { LoadingService } from './services/loading.service';
 
 
 @NgModule({
@@ -51,6 +56,8 @@ import { ShortStringPipe } from './pipes/short-string.pipe';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule,
     NgxEditorModule.forRoot({
       locals: {
         // menu
@@ -93,7 +100,12 @@ import { ShortStringPipe } from './pipes/short-string.pipe';
   providers: [
     appRoutingProviders,
     IdentityGuard,
-    UserService
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NetworkInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

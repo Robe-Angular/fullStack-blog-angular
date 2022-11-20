@@ -73,5 +73,22 @@ export class PostService{
 			.set('Authorization', token);
 		return this._http.get(this.url + 'image/'+imageId+'/edit', {headers: headers});
 	}
+
+	changeImageDescription(token,imageId,image){
+		let json = JSON.stringify(image);
+		let params = "json="+encodeURIComponent(json);
+
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.put(this.url + 'image/'+imageId, params , {headers: headers});
+	}
+
+	deleteImage(token,imageId){
+		
+
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.delete(this.url + 'image/'+imageId, {headers: headers});
+	}
 	
 }
