@@ -42,7 +42,9 @@ export class CategoryNewComponent implements OnInit {
 					this.category = response.category;
 					this.status = 'success';
 
-					this._router.navigate(['/inicio']);
+					this._router.navigate(['/inicio']).then(() => {
+						window.location.reload();
+					});
 				}else{
 					this.status = 'error';
 				}

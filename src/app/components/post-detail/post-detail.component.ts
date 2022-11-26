@@ -3,6 +3,7 @@ import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { global } from '../../services/global';
 
 @Component({
   selector: 'app-post-detail',
@@ -12,16 +13,18 @@ import { UserService } from '../../services/user.service';
 })
 export class PostDetailComponent implements OnInit {
 	public post: Post;
-	public identity
+	public identity;
+	public url;
 
 	constructor(
 		private _postService: PostService,
 		private _route: ActivatedRoute,
 		private _router: Router,
-		private _userService: UserService
+		private _userService: UserService,
 
 	){ 
 		this.identity = this._userService.getIdentity();
+		this.url = global.url;
 	}
 
 	ngOnInit(): void {

@@ -35,9 +35,11 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 
 	ngAfterViewChecked(): void {
 		this._detectorRef.detectChanges();
+		
 	}
 	ngDoCheck(){
 		this.loadUser();
+		
 	}
 
 	loadUser(){
