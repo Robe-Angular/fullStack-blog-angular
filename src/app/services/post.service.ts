@@ -84,11 +84,15 @@ export class PostService{
 	}
 
 	deleteImage(token,imageId){
-		
-
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization', token);
 		return this._http.delete(this.url + 'image/'+imageId, {headers: headers});
+	}
+
+	getPostsAdmin(token){
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.get(this.url + 'post/admin', {headers:headers});
 	}
 	
 }

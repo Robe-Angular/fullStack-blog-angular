@@ -31,6 +31,7 @@ import { ShortStringPipe } from './pipes/short-string.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NetworkInterceptor } from './interceptors/network.interceptor';
 import { LoadingService } from './services/loading.service';
+import { PostsAdminComponent } from './components/posts-admin/posts-admin.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { LoadingService } from './services/loading.service';
     ProfileComponent,
     PostListComponent,
     SanitizeHTMLPipe,
-    ShortStringPipe
+    ShortStringPipe,
+    PostsAdminComponent
   ],
   imports: [
     routing,
