@@ -88,9 +88,9 @@ export class PostNewComponent implements OnInit,OnDestroy {
 			response => {
 				if(response.status == 'success'){
 					this.post = response.post;
-					console.log(response);
+					
 					this.status = 'success';
-					this._router.navigate(['/inicio']);
+					this._router.navigate(['/editar-entrada',this.post.id]);
 				}else{
 
 				}

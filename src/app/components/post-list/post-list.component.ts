@@ -16,6 +16,9 @@ export class PostListComponent implements OnInit {
 	@Output()
 	eliminar = new EventEmitter<number>();
 
+	@Output()
+	outPublish = new EventEmitter<any>();
+
 	constructor() { }
 
 	ngOnInit(): void {
@@ -23,6 +26,10 @@ export class PostListComponent implements OnInit {
 
 	deletePost(id){
 		this.eliminar.emit(id);
+	}
+
+	publish(id,publish){
+		this.outPublish.emit({id,publish});
 	}
 
 }

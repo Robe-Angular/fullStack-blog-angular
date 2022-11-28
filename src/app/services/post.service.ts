@@ -89,10 +89,20 @@ export class PostService{
 		return this._http.delete(this.url + 'image/'+imageId, {headers: headers});
 	}
 
-	getPostsAdmin(token){
+	getPostsAdmin(token):Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization', token);
-		return this._http.get(this.url + 'post/admin', {headers:headers});
+		console.log('posts-admin');
+		return this._http.get(this.url + 'list-post-admin', {headers:headers});
+	}
+
+	
+	publishPost(token,booleanInBoolean,postId):Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		let booleanValueString = booleanInBoolean ? 'true':'false';
+		
+		return this._http.get(this.url + 'post/publish/'+ postId + '/' + booleanValueString, {headers:headers});
 	}
 	
 }

@@ -26,10 +26,11 @@ export class PostsAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+	this.getPosts();
   }
 
   getPosts(){
-		this._postService.getPosts().subscribe(
+		this._postService.getPostsAdmin(this.token).subscribe(
 			response => {
 				if(response.status == 'success'){
 					this.posts = response.posts;
@@ -52,6 +53,19 @@ export class PostsAdminComponent implements OnInit {
 
 			}
 		);
+	}
+
+	publishPost($event){
+		let publish =  $event.publish;
+		let postId = $event.id;
+		console.log($event);
+		this._postService.publishPost(this.token,publish,postId).subscribe(
+			response => {
+				this.getPosts();
+			},error => {
+				console.log(error);
+			}
+		)
 	}
 
 }
