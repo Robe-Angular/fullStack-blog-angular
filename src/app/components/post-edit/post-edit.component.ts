@@ -87,6 +87,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.getCategories();
 		this.post = new Post(1, this.identity.sub, 1, '', '', null, null);
 		this.getPost();
+
 	}
 
 	ngOnDestroy(): void {
@@ -158,6 +159,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 					if(response.status = 'success'){
 						
 						this.post = response.post;
+						this.html = response.post.content;
 						this.postLoaded = true;
 						if(this.identity.sub != 1){
 							this._router.navigate(['/inicio']);
