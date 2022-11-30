@@ -32,6 +32,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public securityTrust: SafeHtml;
 	public imagesOnPost:Array<any>;
 	public mainImage:string;
+	public html:string;
 
 	public afuConfig = {
 	    multiple: false,
@@ -79,7 +80,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		];
 		this.imagesOnPost = [];
 		this.postLoaded = false;		
-
+		this.html = '';
 	}
 
 	ngOnInit(): void {
@@ -93,6 +94,8 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit(form){
+		//console.log(this.html);
+		this.post.content = this.html;
 		this._postService.update(this.token, this.post, this.post.id).subscribe(
 			response =>{
 				if(response.status == 'success'){
