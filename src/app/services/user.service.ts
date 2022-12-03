@@ -70,7 +70,7 @@ export class UserService{
 		if(token != 'undefined'){
 			this.token = token;
 		}else{
-			this.token = null;
+			this.token = '';
 		}
 
 		return this.token;
