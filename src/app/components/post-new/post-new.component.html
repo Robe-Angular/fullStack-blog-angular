@@ -31,7 +31,7 @@
 			<div id="editor-wrapper">
 				<div id="editor">
 					<ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"></ngx-editor-menu>
-					<ngx-editor [editor]="editor" name="content" #content="ngModel" [(ngModel)]="html" required></ngx-editor>
+					<ngx-editor [editor]="editor" name="content" #content="ngModel" [(ngModel)]="htmlDoc" required></ngx-editor>
 					<small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
 						El contenido no es válido
 					</small>

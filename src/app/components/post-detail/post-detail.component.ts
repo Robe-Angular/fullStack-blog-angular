@@ -15,6 +15,7 @@ export class PostDetailComponent implements OnInit {
 	public post: Post;
 	public identity;
 	public url;
+	public token:string;
 
 	constructor(
 		private _postService: PostService,
@@ -25,6 +26,7 @@ export class PostDetailComponent implements OnInit {
 	){ 
 		this.identity = this._userService.getIdentity();
 		this.url = global.url;
+		this.token = this._userService.getToken();
 	}
 
 	ngOnInit(): void {
@@ -36,10 +38,11 @@ export class PostDetailComponent implements OnInit {
 		this._route.params.subscribe(params => {
 			let id = +params['id'];
 			//Petición Ajax para sacar los datos
-			this._postService.getPost(id).subscribe(
+			this._postService.getPost(id,this.token).subscribe(
 				response => {
 					if(response.status = 'success'){
 						this.post = response.post;
+						this.post.content = response.post.content;
 						console.log(this.post);
 					}else{
 						this._router.navigate(['inicio']);

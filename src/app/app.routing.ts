@@ -16,6 +16,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
 
 import { IdentityGuard } from './services/identity.guard';
 import { PostsAdminComponent } from './components/posts-admin/posts-admin.component';
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
 	//{path: 'registro', component: RegisterComponent},
 	{path: 'ajustes', component: UserEditComponent, canActivate: [IdentityGuard]},
 	{path: 'crear-categoria', component: CategoryNewComponent, canActivate: [IdentityGuard]},
+	{path: 'administrar-categorias', component: ManageCategoriesComponent, canActivate: [IdentityGuard]},
 	{path: 'crear-entrada', component: PostNewComponent, canActivate: [IdentityGuard]},
 	{path: 'entrada/:id', component: PostDetailComponent},
 	{path: 'editar-entrada/:id', component: PostEditComponent, canActivate: [IdentityGuard]},

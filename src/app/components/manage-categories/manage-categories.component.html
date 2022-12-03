@@ -1,0 +1,5 @@
+<div *ngIf="categories.length > 0">
+    <p *ngFor="let category of categories">
+        {{category.name}} <button (click)="delete(category.id)">Eliminar</button>
+    </p>
+</div>

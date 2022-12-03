@@ -8,6 +8,7 @@ import { global } from '../../services/global';
 import { Editor } from 'ngx-editor';
 import { Toolbar } from 'ngx-editor/public_api';
 import { SafeHtml } from '@angular/platform-browser';
+import { toHTML } from 'ngx-editor';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public securityTrust: SafeHtml;
 	public imagesOnPost:Array<any>;
 	public mainImage:string;
-	public html:string;
+	public htmlDoc:string;
+	public htmlLocal:string;
 
 	public afuConfig = {
 	    multiple: false,
@@ -80,13 +82,14 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		];
 		this.imagesOnPost = [];
 		this.postLoaded = false;		
-		this.html = '';
+		this.htmlDoc = '';
+		this.htmlLocal = '';
 	}
 
 	ngOnInit(): void {
 		this.getCategories();
 		this.post = new Post(1, this.identity.sub, 1, '', '', null, null);
-		this.getPost();
+		this.getPost(true);
 
 	}
 
@@ -95,8 +98,9 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit(form){
-		//console.log(this.html);
-		this.post.content = this.html;
+		//console.log(this.htmlDoc);
+		//this.post.content = this.htmlDoc;
+		this.post.content = this.htmlDoc;
 		this._postService.update(this.token, this.post, this.post.id).subscribe(
 			response =>{
 				if(response.status == 'success'){
@@ -149,17 +153,23 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		)
 	}
 
-	getPost(){
+	getPost(init:boolean=false){
+		if(!init){
+			this.htmlLocal = this.htmlDoc;
+		}		
 		//Sacar el id del post de la URL
 		this._route.params.subscribe(params => {
 			let id = +params['id'];
 			//Petición Ajax para sacar los datos
-			this._postService.getPost(id).subscribe(
+			this._postService.getPost(id,this.token).subscribe(
 				response => {
 					if(response.status = 'success'){
 						
 						this.post = response.post;
-						this.html = response.post.content;
+						this.htmlDoc = response.post.content;
+						if(!init){
+							this.htmlDoc = this.htmlLocal;
+						}		
 						this.postLoaded = true;
 						if(this.identity.sub != 1){
 							this._router.navigate(['/inicio']);

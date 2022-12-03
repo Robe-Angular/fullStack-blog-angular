@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NetworkInterceptor } from './interceptors/network.interceptor';
 import { LoadingService } from './services/loading.service';
 import { PostsAdminComponent } from './components/posts-admin/posts-admin.component';
+import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { PostsAdminComponent } from './components/posts-admin/posts-admin.compon
     PostListComponent,
     SanitizeHTMLPipe,
     ShortStringPipe,
-    PostsAdminComponent
+    PostsAdminComponent,
+    ManageCategoriesComponent
   ],
   imports: [
     routing,

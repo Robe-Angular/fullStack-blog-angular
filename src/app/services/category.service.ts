@@ -33,6 +33,13 @@ export class CategoryService{
 		return this._http.get(this.url + 'category/' + id, {headers: headers});
 	}
 
+	deleteCategory(id,token):Observable<any>{
+		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);;
+		return this._http.delete(this.url + 'category/' + id, {headers: headers});
+	}
+
+
 	getPosts(id):Observable<any>{
 		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded');
 		return this._http.get(this.url + 'post/category/' + id, {headers: headers});
