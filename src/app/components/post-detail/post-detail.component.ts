@@ -31,6 +31,7 @@ export class PostDetailComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getPost();
+		console.log(this.token);
 	}
 
 	getPost(){
