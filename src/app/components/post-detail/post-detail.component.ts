@@ -34,7 +34,7 @@ export class PostDetailComponent implements OnInit {
 	
 	ngOnInit(): void {
 		this.getPost();
-		window.FB.XFBML.parse();
+		
 	}
 
 	getPost(){
@@ -47,6 +47,7 @@ export class PostDetailComponent implements OnInit {
 					if(response.status = 'success'){
 						this.post = response.post;
 						this.post.content = response.post.content;
+						window.FB.XFBML.parse();
 						console.log(this.post);
 					}else{
 						this._router.navigate(['inicio']);
