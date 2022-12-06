@@ -16,6 +16,7 @@ export class PostDetailComponent implements OnInit {
 	public identity;
 	public url;
 	public token:string;
+	
 
 	constructor(
 		private _postService: PostService,
@@ -29,9 +30,11 @@ export class PostDetailComponent implements OnInit {
 		this.token = this._userService.getToken();
 	}
 
+	
+	
 	ngOnInit(): void {
 		this.getPost();
-		console.log(this.token);
+		window.FB.XFBML.parse();
 	}
 
 	getPost(){

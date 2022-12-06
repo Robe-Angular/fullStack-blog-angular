@@ -7,9 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="HzAtE2jb"></script>
+<body>  
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '3358562431099371',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v15.0'
+      });
+    };
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  
+  
   <app-root></app-root>
 </body>
 </html>

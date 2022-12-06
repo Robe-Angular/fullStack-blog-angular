@@ -8,7 +8,7 @@
 	</h1>	
 	<hr/>
 	<p>
-		{{post.category.name}}-<!--<a [routerLink]="['/perfil',post.user.id]">{{post.user.name}} {{post.user.surname}}</a>-->
+		{{post.category.name}}<!--<a [routerLink]="['/perfil',post.user.id]">{{post.user.name}} {{post.user.surname}}</a>-->
 	</p>
 	<hr/>
 	<div class="post-wrapper" >
@@ -16,9 +16,10 @@
 			{{post.content}}
 		</div>		
 	</div>
-	<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator"
-		data-href="{{url}}entrada/{{post.id}}"
-	>
+	<div class="fb-comments" data-href="http://kolodyo.pw/entradas/1" 
+	data-width="" 
+	data-numposts="5"
+	data-mobile="false">
 
 	</div>
 </div>
