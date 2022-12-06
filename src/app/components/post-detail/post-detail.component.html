@@ -2,7 +2,7 @@
 <div class="col-md-12" *ngIf="!post">
 	Cargando...
 </div>
-<div class="col-md-12 mt-3" *ngIf="post">
+<div class="col-md-12 mt-3" id="post-container" *ngIf="post">
 	<h1>
 		{{post.title}}
 	</h1>	
@@ -16,8 +16,8 @@
 			{{post.content}}
 		</div>		
 	</div>
-	<div class="fb-comments" data-href="http://kolodyo.pw/entradas/1" 
-	data-width="" 
+	<div class="fb-comments" data-href="http://kolodyo.pw/entrada/1" 
+	data-width="100" 
 	data-numposts="5"
 	data-mobile="false">
 

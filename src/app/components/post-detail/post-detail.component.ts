@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -11,7 +11,7 @@ import { global } from '../../services/global';
   styleUrls: ['./post-detail.component.css'],
   providers: [PostService,UserService]
 })
-export class PostDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit,AfterViewChecked {
 	public post: Post;
 	public identity;
 	public url;
@@ -30,7 +30,9 @@ export class PostDetailComponent implements OnInit {
 		this.token = this._userService.getToken();
 	}
 
-	
+	ngAfterViewChecked(){
+		window.FB.XFBML.parse();
+	}
 	
 	ngOnInit(): void {
 		this.getPost();
@@ -47,7 +49,7 @@ export class PostDetailComponent implements OnInit {
 					if(response.status = 'success'){
 						this.post = response.post;
 						this.post.content = response.post.content;
-						window.FB.XFBML.parse();
+						FB.XFBML.parse(document.getElementById('post-container'));
 						console.log(this.post);
 					}else{
 						this._router.navigate(['inicio']);

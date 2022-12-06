@@ -43,7 +43,7 @@ export class PostService{
 		let json = JSON.stringify(post);
 		let params_sin_encode = "json="+(json);
 		let params = "json="+encodeURIComponent(json);
-		console.log(params_sin_encode);
+		//console.log(params_sin_encode);
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization', token);
 		return this._http.put(this.url + 'post/' + id, params, {headers: headers});
