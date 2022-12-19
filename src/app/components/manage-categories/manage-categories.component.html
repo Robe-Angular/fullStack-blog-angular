@@ -1,5 +1,30 @@
 <div *ngIf="categories.length > 0">
-    <p *ngFor="let category of categories">
-        {{category.name}} <button (click)="delete(category.id)">Eliminar</button>
-    </p>
+    <div *ngFor="let category of categories">
+        <p>
+            {{category.name}} 
+            <button (click)="delete(category.id)">Eliminar</button>
+            <button (click)="showCategoryDetail(category.id)">Detalles</button>
+        </p>
+        <div *ngIf="activatedCategory == category.id">
+            <div *ngFor="let categoryLanguage of categoriesLanguageArray">
+                <p>
+                    {{categoryLanguage.name_language}} - {{categoryLanguage.language_symbol}}
+                    <span><button (click)="deleteCategoryLanguage(categoryLanguage.id)">Eliminar</button></span>
+                </p>
+
+                
+            </div>
+            <p>
+                Submit Language
+            </p>
+            <label for="name-language">Language name</label>
+            <input type="text" name="name-language" #nameLanguage="ngModel" [(ngModel)]="categoryLanguage.name_language"/>
+            <label for="language-symbol">Language symbol</label>
+            <input type="text" name="language-symbol" #languageSymbol="ngModel" [(ngModel)]="categoryLanguage.language_symbol"/>
+            <button (click)="saveCategoryLanguage(category.id)">Guardar</button>
+        </div>
+        
+
+    </div>
+
 </div>

@@ -33,9 +33,30 @@ export class CategoryService{
 		return this._http.get(this.url + 'category/' + id, {headers: headers});
 	}
 
+	getCategoryDetail(id):Observable<any>{
+		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded');
+		return this._http.get(this.url + 'getCategoriesLanguageFromOne/' + id, {headers: headers});
+	}
+
+	submitCategoryLanguage(token,categoryLanguage,id):Observable<any>{
+		let json = JSON.stringify(categoryLanguage);
+		let params = "json="+json;
+
+		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.put(this.url + 'categoryLanguage/'+id, params, {headers: headers});
+	}
+
+	
+	deleteCategoryLanguage(token,id):Observable<any>{
+		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.delete(this.url + 'categoryLanguage/'+id, {headers: headers});
+	}
+
 	deleteCategory(id,token):Observable<any>{
 		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded')
-			.set('Authorization', token);;
+			.set('Authorization', token);
 		return this._http.delete(this.url + 'category/' + id, {headers: headers});
 	}
 

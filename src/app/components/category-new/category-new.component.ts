@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params }  from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Category } from '../../models/category';
-import { CategoryService } from '../../services/category.service'
+import { CategoryService } from '../../services/category.service';
+import { global } from '../../services/global';
 
 @Component({
   selector: 'app-category-new',
@@ -17,7 +18,7 @@ export class CategoryNewComponent implements OnInit {
 	public token;
 	public category: Category;
 	public status:string;
-
+	public langs:string[];
 
 
 	constructor(
@@ -30,9 +31,12 @@ export class CategoryNewComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.category = new Category(1, '');
+		this.langs = global.langs;
+
 	}
 
 	ngOnInit(): void {
+		
 	}
 
 	onSubmit(form){
@@ -42,9 +46,9 @@ export class CategoryNewComponent implements OnInit {
 					this.category = response.category;
 					this.status = 'success';
 
-					this._router.navigate(['/inicio']).then(() => {
-						window.location.reload();
-					});
+					//this._router.navigate(['/inicio']).then(() => {
+					//	window.location.reload();
+					//});
 				}else{
 					this.status = 'error';
 				}

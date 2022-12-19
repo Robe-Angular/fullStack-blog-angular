@@ -21,6 +21,7 @@
 			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
 				El nombre de la categoría no es válido
 			</small>			
+			
 		</div>
 		<input type="submit" value="Guardar" class="btn btn-success" [disabled]="categoryForm.invalid">
 	</form>
