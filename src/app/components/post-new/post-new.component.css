@@ -21,3 +21,8 @@
     min-width: 100px;
     min-height: 100px;
 }
+
+.lang{
+    width: auto;
+    float: left;
+}

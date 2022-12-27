@@ -26,7 +26,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public categories;
 	public resetVar:string;
 	public status;
-	public is_edit: boolean;
+	public isEdit: boolean;
 	public url: string;
 	public editor: Editor;
 	public toolbar: Toolbar;
@@ -35,6 +35,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public mainImage:string;
 	public htmlDoc:string;
 	public htmlLocal:string;
+	public langs: string[];
 
 	public afuConfig = {
 	    multiple: false,
@@ -65,7 +66,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.page_title = 'Editar una entrada';
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
-		this.is_edit = true;
+		this.isEdit = true;
 		this.url = global.url;
 		this.editor = new Editor();
 		this.toolbar = [			
@@ -84,6 +85,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.postLoaded = false;		
 		this.htmlDoc = '';
 		this.htmlLocal = '';
+		this.langs = global.langs;
 	}
 
 	ngOnInit(): void {

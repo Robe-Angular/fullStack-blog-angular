@@ -1,10 +1,10 @@
 <div class="col-md-12 mt-3">
 	<h1>{{page_title}}</h1>
 
-	<p *ngIf="!is_edit">
+	<p *ngIf="!isEdit">
 		Añade un nuevo artículo al Blog
 	</p>
-	<p *ngIf="is_edit && post && postLoaded">
+	<p *ngIf="isEdit && post && postLoaded">
 		Modifica el post: {{post.title}}
 	</p>
 	<hr/>
@@ -15,18 +15,24 @@
 	<div class="alert alert-danger col-md-5" *ngIf="status == 'error'">
 		Los datos no se han guardado
 	</div>
+	<div id="lang-selector" *ngIf="isEdit">
+		<div *ngFor="let lang of langs" class="lang">
+			<button>{{lang}}</button>
+		</div>
+	</div>
+	<div class="clearfix"></div>
 	<!--Formulario de crear entrada-->
 	<form class="col-md-12 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)"
 		*ngIf="postLoaded"
 	>
-		<div class="form-group" *ngIf="is_edit">
+		<div class="form-group" *ngIf="isEdit">
 			<label for="title">Título</label>
 			<input type="tex" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
 			<small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
 				El título no es válido
 			</small>
 		</div>
-		<div *ngIf="is_edit">
+		<div *ngIf="isEdit">
 			<label for="content">Contenido</label>
 			<div id="editor-wrapper">
 				<div id="editor">
@@ -49,9 +55,9 @@
 				</option>
 			</select>
 		</div>
-		<div class="form-group" *ngIf="is_edit && post.id">
+		<div class="form-group" *ngIf="isEdit && post.id">
 			<label for="image">Images</label>
-			<div *ngIf="is_edit">
+			<div *ngIf="isEdit">
 				<div *ngFor="let imageOnPost of imagesOnPost" class="imageOnPost">
 					<img src="{{url + 'post/image/' + imageOnPost.description}}" class="avatar_edit"/>
 					<div class="clearfix">

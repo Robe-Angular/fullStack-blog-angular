@@ -22,10 +22,11 @@ export class PostNewComponent implements OnInit,OnDestroy {
 	public categories;
 	public resetVar:string;
 	public status;
-	public is_edit;
+	public isEdit;
 	public editor:Editor;
 	public toolbar: Toolbar;
 	public postLoaded:boolean;
+	public langs:string[];
 
 	public afuConfig = {
 	    multiple: false,
@@ -56,7 +57,7 @@ export class PostNewComponent implements OnInit,OnDestroy {
 		this.page_title = 'Crear una entrada';
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
-		this.is_edit = false;
+		this.isEdit = false;
 		this.editor = new Editor();
 		this.toolbar = [			
 			// default value
@@ -71,6 +72,7 @@ export class PostNewComponent implements OnInit,OnDestroy {
 			['horizontal_rule', 'format_clear']			
 		];
 		this.postLoaded = true;
+		this.langs = global.langs;
 	}
 
 	ngOnInit(): void {
