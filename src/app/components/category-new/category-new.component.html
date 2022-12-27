@@ -15,11 +15,11 @@
 	<!--Formulario de crear categoría-->
 	<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" class="col-md-5">
 		<div class="form-group">
-			<label for="name">Nombre</label>
-			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.name" required>
+			<label for="name">Descripción</label>
+			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.description" required>
 
 			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
-				El nombre de la categoría no es válido
+				La descripción de la categoría no es válida.
 			</small>			
 			
 		</div>

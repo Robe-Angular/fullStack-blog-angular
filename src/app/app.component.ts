@@ -2,6 +2,7 @@ import { Component, OnInit, DoCheck, AfterViewChecked, ChangeDetectorRef } from 
 import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
 import { LoadingService } from './services/loading.service';
+
 import { global } from  './services/global';
 
 @Component({
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 	constructor(
 		private _userService: UserService,
 		private _categoryService: CategoryService,
+		
 		private _loadingService:LoadingService,
 		private _detectorRef: ChangeDetectorRef
 	){
@@ -60,5 +62,7 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 			}
 		)
 	}
+
+	
 
 }

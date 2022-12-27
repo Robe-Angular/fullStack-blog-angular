@@ -15,11 +15,11 @@
 	<div class="alert alert-danger col-md-5" *ngIf="status == 'error'">
 		Los datos no se han guardado
 	</div>
-	<!--Formulario de crar entrada-->
+	<!--Formulario de crear entrada-->
 	<form class="col-md-12 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)"
 		*ngIf="postLoaded"
 	>
-		<div class="form-group">
+		<div class="form-group" *ngIf="is_edit">
 			<label for="title">Título</label>
 			<input type="tex" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
 			<small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
@@ -45,7 +45,7 @@
 			</label>
 			<select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
 				<option *ngFor="let category of categories" value="{{category.id}}">
-					{{category.name}}
+					{{category.description}}
 				</option>
 			</select>
 		</div>
