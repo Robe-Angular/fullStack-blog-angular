@@ -23,9 +23,15 @@ export class CategoryService{
 		return this._http.post(this.url + 'category', params, {headers: headers});
 	}
 
+	
 	getCategories():Observable<any>{
 		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded');
 		return this._http.get(this.url + 'category', {headers: headers});
+	}
+
+	getCategoriesLanguage(locale:string):Observable<any>{
+		let headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded');
+		return this._http.get(this.url + 'getCategoriesLanguage/' + locale, {headers: headers});
 	}
 
 	getCategory(id):Observable<any>{

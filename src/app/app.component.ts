@@ -2,7 +2,7 @@ import { Component, OnInit, DoCheck, AfterViewChecked, ChangeDetectorRef } from 
 import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
 import { LoadingService } from './services/loading.service';
-
+import { I18nServiceService } from './services/i18n-service.service';
 import { global } from  './services/global';
 
 @Component({
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 	constructor(
 		private _userService: UserService,
 		private _categoryService: CategoryService,
-		
+		private _i18nService: I18nServiceService,
 		private _loadingService:LoadingService,
 		private _detectorRef: ChangeDetectorRef
 	){
@@ -50,10 +50,16 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 	}
 
 	getCategories(){
-		this._categoryService.getCategories().subscribe(
+		console.log($localize.locale);
+		
+		let locale = this._i18nService.getlocale();
+		let languageParam = locale == undefined ? window.navigator.language: locale;
+		this._categoryService.getCategoriesLanguage(languageParam).subscribe(
 			response =>{
 				if(response.status=='success'){
+					
 					this.categories = response.categories;
+					console.log(response);
 				}
 				
 			},
