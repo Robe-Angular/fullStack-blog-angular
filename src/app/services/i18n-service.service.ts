@@ -9,6 +9,8 @@ export class I18nServiceService {
   constructor() { }
 
   getlocale(){
-    return $localize.locale;
+    let locale = $localize.locale;
+    let languageParam = locale == undefined ? window.navigator.language: locale;
+    return languageParam;
   }
 }

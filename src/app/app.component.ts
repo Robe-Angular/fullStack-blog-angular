@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 	public identity;
 	public token;
 	public url;
-	public categories;
+	public categoriesLanguage;
 	public loading$ = this._loadingService.loading$;
 
 	constructor(
@@ -52,14 +52,16 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 	getCategories(){
 		console.log($localize.locale);
 		
-		let locale = this._i18nService.getlocale();
-		let languageParam = locale == undefined ? window.navigator.language: locale;
+		
+		let languageParam = this._i18nService.getlocale();
 		this._categoryService.getCategoriesLanguage(languageParam).subscribe(
 			response =>{
 				if(response.status=='success'){
 					
-					this.categories = response.categories;
+					this.categoriesLanguage = response.categories;
 					console.log(response);
+					console.log(this.categoriesLanguage);
+					console.log(languageParam);
 				}
 				
 			},

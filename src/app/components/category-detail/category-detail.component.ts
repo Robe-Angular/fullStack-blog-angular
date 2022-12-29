@@ -5,6 +5,7 @@ import { CategoryService } from '../../services/category.service';
 import { global } from '../../services/global';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
+import { I18nServiceService } from 'src/app/services/i18n-service.service';
 
 @Component({
   selector: 'app-category-detail',
@@ -27,7 +28,8 @@ export class CategoryDetailComponent implements OnInit {
 		private _router: Router,
 		private _categoryService:  CategoryService,
 		private _userService: UserService,
-		private _postService: PostService
+		private _postService: PostService,
+		private _i18nService: I18nServiceService
 	) { 
 		this.url = global.url;
 		this.posts = [];
@@ -46,8 +48,10 @@ export class CategoryDetailComponent implements OnInit {
 			this._categoryService.getCategory(id).subscribe(
 				response => {
 					if(response.status == 'success'){
+						console.log(response);
 						this.category = response.category;
-						this._categoryService.getPosts(id).subscribe(
+						let languageParam = this._i18nService.getlocale();
+						this._categoryService.getPosts(id,languageParam).subscribe(
 							response => {
 								if(response.status == 'success'){
 
