@@ -77,7 +77,7 @@ export class PostNewComponent implements OnInit,OnDestroy {
 
 	ngOnInit(): void {
 		this.getCategories();
-		this.post = new Post(1, this.identity.sub, 1, '', '', null, null);
+		this.post = new Post(1, 1, '',  null);
 		
 	}
 	

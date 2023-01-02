@@ -28,15 +28,15 @@ export class PostService{
 		return this._http.post(this.url + 'post', params, {headers: headers});
 	}
 
-	getPosts():Observable<any>{
+	getPostsLanguage(language:string):Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.get(this.url + 'post', {headers:headers});
+		return this._http.get(this.url + 'post-lang' + '/' + language, {headers:headers});
 	}
 
-	getPost(id,token):Observable<any>{
+	getPost(id,token,language:string):Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization',token);
-		return this._http.get(this.url + 'post/' + id, {headers:headers});	
+		return this._http.get(this.url + 'post-language/' + id + '/' + language, {headers:headers});	
 	}
 
 	update(token, post, id):Observable<any>{
@@ -90,11 +90,11 @@ export class PostService{
 		return this._http.delete(this.url + 'image/'+imageId, {headers: headers});
 	}
 
-	getPostsAdmin(token):Observable<any>{
+	getPostsAdmin(token,language):Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization', token);
 		console.log('posts-admin');
-		return this._http.get(this.url + 'list-post-admin', {headers:headers});
+		return this._http.get(this.url + 'list-post-admin' + '/' + language , {headers:headers});
 	}
 
 	

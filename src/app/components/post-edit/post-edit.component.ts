@@ -4,12 +4,14 @@ import { UserService } from '../../services/user.service';
 import { CategoryService } from '../../services/category.service';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../models/post';
+import { PostLanguage } from 'src/app/models/post_language';
 import { global } from '../../services/global';
 import { Editor } from 'ngx-editor';
 import { Toolbar } from 'ngx-editor/public_api';
 import { SafeHtml } from '@angular/platform-browser';
-import { toHTML } from 'ngx-editor';
 
+
+import { I18nServiceService } from 'src/app/services/i18n-service.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -36,6 +38,8 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public htmlDoc:string;
 	public htmlLocal:string;
 	public langs: string[];
+	public languageParam:string;
+	public postLanguage: PostLanguage;
 
 	public afuConfig = {
 	    multiple: false,
@@ -61,7 +65,8 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		private _router : Router,
 		private _userService: UserService,
 		private _categoryService: CategoryService,
-		private _postService: PostService
+		private _postService: PostService,
+		private _i18nService: I18nServiceService
 	) {
 		this.page_title = 'Editar una entrada';
 		this.identity = this._userService.getIdentity();
@@ -86,12 +91,14 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.htmlDoc = '';
 		this.htmlLocal = '';
 		this.langs = global.langs;
+		this.languageParam = this._i18nService.getlocale();
 	}
 
 	ngOnInit(): void {
 		this.getCategories();
-		this.post = new Post(1, this.identity.sub, 1, '', '', null, null);
-		this.getPost(true);
+		this.post = new Post(1, 1, '',  null);
+		this.postLanguage = new PostLanguage(1,"","","",null,null);
+		this.getPost(true,this.languageParam);
 
 	}
 
@@ -102,7 +109,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	onSubmit(form){
 		//console.log(this.htmlDoc);
 		//this.post.content = this.htmlDoc;
-		this.post.content = this.htmlDoc;
+		this.postLanguage.content_language = this.htmlDoc;
 		this._postService.update(this.token, this.post, this.post.id).subscribe(
 			response =>{
 				if(response.status == 'success'){
@@ -110,7 +117,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
 					//this.post = response.post;
 					//Redirigir a la página del Post
 					this._router.navigate(['/entrada', this.post.id]);
-					console.log('éxito');
 				}else{
 					this.status = 'error';
 					console.log(response);
@@ -148,14 +154,14 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		}
 		this._postService.registerImage(this.token,imageToRegister).subscribe(
 			response => {
-				this.getPost();
+				this.getPost(false,this.languageParam);
 			},error => {
 
 			}
 		)
 	}
 
-	getPost(init:boolean=false){
+	getPost(init:boolean=false,language:string){
 		if(!init){
 			this.htmlLocal = this.htmlDoc;
 		}		
@@ -163,12 +169,12 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this._route.params.subscribe(params => {
 			let id = +params['id'];
 			//Petición Ajax para sacar los datos
-			this._postService.getPost(id,this.token).subscribe(
+			this._postService.getPost(id,this.token,language).subscribe(
 				response => {
 					if(response.status = 'success'){
-						
-						this.post = response.post;
-						this.htmlDoc = response.post.content;
+
+						this.htmlDoc = response.post[0].posts_language[0].content_language;
+						this.postLanguage = response.post[0].posts_language[0];
 						if(!init){
 							this.htmlDoc = this.htmlLocal;
 						}		
@@ -184,8 +190,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
 								}
 							);
 						}
-
-						
 					}else{
 						this._router.navigate(['/inicio']);
 					}
@@ -201,7 +205,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	setMainImage(imageId){
 		this._postService.setMainImage(this.token,imageId).subscribe(
 			response => {
-				this.getPost();
+				this.getPost(false,this.languageParam);
 			},error => {
 				console.log(error);
 			}
@@ -210,7 +214,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	submitDescription(imageId,imageOnPost){
 		this._postService.changeImageDescription(this.token,imageId,imageOnPost).subscribe(
 			response => {
-				this.getPost();
+				this.getPost(false,this.languageParam);
 			},error => {
 				console.log(error);
 			}
@@ -219,11 +223,15 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	deleteImage(imageOPostId){
 		this._postService.deleteImage(this.token,imageOPostId).subscribe(
 			response => {
-				this.getPost();
+				this.getPost(false,this.languageParam);
 			},error => {
 				console.log(error);
 			}
 		);
+	}
+
+	changeLanguage(lang:string){
+		this.getPost(false,lang);
 	}
 
 }

@@ -21,6 +21,7 @@ export class CategoryDetailComponent implements OnInit {
 	public url: string;
 	public identity;
 	public token;
+	public languageParam;
 
 
 	constructor(
@@ -36,6 +37,7 @@ export class CategoryDetailComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken(); 
 		this.postsLoaded = false;
+		this.languageParam = "";
 	}
 
 	ngOnInit(): void {
@@ -50,8 +52,8 @@ export class CategoryDetailComponent implements OnInit {
 					if(response.status == 'success'){
 						console.log(response);
 						this.category = response.category;
-						let languageParam = this._i18nService.getlocale();
-						this._categoryService.getPosts(id,languageParam).subscribe(
+						this.languageParam = this._i18nService.getlocale();
+						this._categoryService.getPosts(id,this.languageParam).subscribe(
 							response => {
 								if(response.status == 'success'){
 

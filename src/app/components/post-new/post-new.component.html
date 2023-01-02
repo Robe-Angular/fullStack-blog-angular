@@ -17,7 +17,29 @@
 	</div>
 	<div id="lang-selector" *ngIf="isEdit">
 		<div *ngFor="let lang of langs" class="lang">
-			<button>{{lang}}</button>
+
+			<button data-toggle="modal" [attr.data-target]="'#myModal'+lang">{{lang}}</button>
+
+			<div class="modal fade" id="{{'myModal'+lang}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="{{'myModal'+lang}}">¿Seguro que quieres borrar esta entrada?</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Vas a cambiar el idioma a {{lang}} podrías perder datos
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal">Close</button>
+							<a (click)="changeLanguage(lang)" class="btn btn-danger" data-dismiss="modal">Cambiar</a>
+						</div>
+					</div>
+				</div>
+			</div>			
+
 		</div>
 	</div>
 	<div class="clearfix"></div>
@@ -27,7 +49,7 @@
 	>
 		<div class="form-group" *ngIf="isEdit">
 			<label for="title">Título</label>
-			<input type="tex" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
+			<input type="tex" name="title" #title="ngModel" [(ngModel)]="postLanguage.title_language" class="form-control" required>
 			<small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
 				El título no es válido
 			</small>

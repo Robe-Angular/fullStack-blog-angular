@@ -53,6 +53,11 @@ body .mat-progress-spinner{
 
 }
 
+.lang{
+    width: auto;
+    float: left;
+}
+
 footer{
 	margin-top: 50px;
 	color: lightgray;

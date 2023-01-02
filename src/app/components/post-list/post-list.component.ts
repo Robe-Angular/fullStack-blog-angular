@@ -12,6 +12,11 @@ export class PostListComponent implements OnInit {
 	@Input() posts;
 	@Input() identity;
 	@Input() url;
+	@Input() set language(value:string){
+		this._language = value;
+		
+	};
+	private _language:string;
 
 	@Output()
 	eliminar = new EventEmitter<number>();
@@ -19,7 +24,13 @@ export class PostListComponent implements OnInit {
 	@Output()
 	outPublish = new EventEmitter<any>();
 
-	constructor() { }
+	constructor(
+		
+	) { } 
+
+	get language():string{
+		return this._language;
+	}
 
 	ngOnInit(): void {
 	}

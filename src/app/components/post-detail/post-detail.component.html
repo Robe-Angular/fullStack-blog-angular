@@ -1,10 +1,10 @@
 
-<div class="col-md-12" *ngIf="!post">
+<div class="col-md-12" *ngIf="!postLanguage">
 	Cargando...
 </div>
-<div class="col-md-12 mt-3" id="post-container" *ngIf="post">
+<div class="col-md-12 mt-3" id="post-container" *ngIf="postLanguage">
 	<h1>
-		{{post.title}}
+		{{postLanguage.title_language}}
 	</h1>	
 	<hr/>
 	<p>

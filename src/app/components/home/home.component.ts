@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
+import { I18nServiceService } from 'src/app/services/i18n-service.service';
 import { global } from  '../../services/global';
 
 @Component({
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
 
 	constructor(
 		private _postService: PostService,
-		private _userService: UserService
+		private _userService: UserService,
+		private _i18nService: I18nServiceService
 	) { 
 		this.page_title = 'inicio';
 		this.url = global.url;
@@ -33,11 +35,12 @@ export class HomeComponent implements OnInit {
 	}
 
 	getPosts(){
-		this._postService.getPosts().subscribe(
+
+		let language_locale = this._i18nService.getlocale();
+		this._postService.getPostsLanguage(language_locale).subscribe(
 			response => {
 				if(response.status == 'success'){
 					this.posts = response.posts;
-
 					console.log(this.posts);
 				}
 			},

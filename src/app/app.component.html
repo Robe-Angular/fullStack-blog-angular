@@ -20,7 +20,7 @@
         </a>
       </li>
       <li class="nav-item" *ngFor="let categoryLanguage of categoriesLanguage">
-        <a class="nav-link" [routerLink]="['categoria',categoryLanguage.category_id]">{{category.name_language}}</a>
+        <a class="nav-link" [routerLink]="['categoria',categoryLanguage.category_id]">{{categoryLanguage.name_language}}</a>
       </li>
     </ul>
     <!--

@@ -2,12 +2,21 @@
 	Cargando...
 </div>
 <div class="container-fluid mt-3" *ngIf="posts">
+
+	<div id="lang-selector">
+		<div *ngFor="let lang of langs" class="lang">
+			<button (click)="changeLang(lang)">{{lang}}</button>
+		</div>
+	</div>
+	<div class="clearfix"></div>
 	<hr>
 	<!--Listado De entradas-->
 	<post-list 	[posts]="posts"
 				[identity]="identity"
 				[url]="url"
+				[language] = "languageParam"
 				(eliminar) = "deletePost($event)"
 				(outPublish) = "publishPost($event)"></post-list>
+
 
 </div>

@@ -3,6 +3,9 @@ import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 import { UserService } from '../../services/user.service';
 import { global } from  '../../services/global';
+import { I18nSelectPipe } from '@angular/common';
+import { I18nServiceService } from 'src/app/services/i18n-service.service';
+
 
 
 @Component({
@@ -16,21 +19,33 @@ export class PostsAdminComponent implements OnInit {
 	public posts: Array<Post>;
 	public identity;
 	public token;
-  constructor(private _postService: PostService,
-		private _userService: UserService
+	public locale_language:string;
+	public langs:string[];
+	public languageParam:string;
+
+  constructor(
+		private _postService: PostService,
+		private _userService: UserService,
+		private _i18nService: I18nServiceService
 	) { 
 		
 		this.url = global.url;
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken(); 
+		this.locale_language = "";
+		this.langs = global.langs;
+		this.languageParam = this._i18nService.getlocale();
   }
 
   ngOnInit(): void {
-	this.getPosts();
+
+	this.locale_language = this._i18nService.getlocale();
+	this.getPosts(this.locale_language);
+
   }
 
-  getPosts(){
-		this._postService.getPostsAdmin(this.token).subscribe(
+  getPosts(language:string){
+		this._postService.getPostsAdmin(this.token,language).subscribe(
 			response => {
 				if(response.status == 'success'){
 					this.posts = response.posts;
@@ -48,7 +63,7 @@ export class PostsAdminComponent implements OnInit {
 	deletePost(id){
 		this._postService.delete(this.token, id).subscribe(
 			response => {
-				this.getPosts();
+				this.getPosts(this.locale_language);
 			},error =>{
 
 			}
@@ -61,11 +76,16 @@ export class PostsAdminComponent implements OnInit {
 		console.log($event);
 		this._postService.publishPost(this.token,publish,postId).subscribe(
 			response => {
-				this.getPosts();
+				this.getPosts(this.locale_language);
 			},error => {
 				console.log(error);
 			}
 		)
+	}
+
+	changeLang(lang:string){
+		this.languageParam = lang;
+		this.getPosts(this.languageParam);
 	}
 
 }
