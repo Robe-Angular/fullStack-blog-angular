@@ -2,14 +2,41 @@
     <div *ngFor="let category of categories">
         <p>
             {{category.description}} 
-            <button (click)="delete(category.id)">Eliminar</button>
-            <button (click)="showCategoryDetail(category.id)">Detalles</button>
+            <!--<button (click)="delete(category.id)">Eliminar</button>-->
+            <!-- Button trigger modal -->
+								<button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#myModal'+category.id">
+									Eliminar
+								</button>
+                                <button (click)="showCategoryDetail(category.id)" class="btn btn-primary">Detalles</button>
         </p>
-        <div *ngIf="activatedCategory == category.id">
+
+								<!-- Modal -->
+								<div class="modal fade" id="{{'myModal'+category.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="{{'myModal'+category.id}}">¿Seguro que quieres borrar esta entrada?</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												Vas a borrar definitivamente {{category.description}}
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal">Close</button>
+												<a (click)="delete(category.id)" class="btn btn-danger" data-dismiss="modal">Borrar</a>
+											</div>
+										</div>
+									</div>
+								</div>						
+            
+        <div *ngIf="activatedCategory == category.id" id="category-active">
             <div *ngFor="let categoryLanguage of categoriesLanguageArray">
                 <p>
                     {{categoryLanguage.name_language}} - {{categoryLanguage.language_symbol}}
                     <span><button (click)="deleteCategoryLanguage(categoryLanguage.id)">Eliminar</button></span>
+
                 </p>
 
                 

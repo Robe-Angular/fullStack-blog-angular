@@ -23,6 +23,7 @@ export class ManageCategoriesComponent implements OnInit {
   public activatedCategory: string;
   public categoriesLanguageArray: Array<any>;
   public categoryLanguage:CategoryLanguageClass;
+  public updateCategoriesMenu: Function;
 
   constructor(
     private _categoryService:CategoryService,
@@ -43,7 +44,9 @@ export class ManageCategoriesComponent implements OnInit {
       response => {
         this.showCategories();
         //console.log(response);
-        window.location.reload();
+        if(this.updateCategoriesMenu){
+          this.updateCategoriesMenu();
+        }
       },error => {
         console.log(error);
       }
@@ -75,7 +78,12 @@ export class ManageCategoriesComponent implements OnInit {
         this.categoryLanguage = {
           name_language:"",
           language_symbol:""
+        };
+        if(this.updateCategoriesMenu){
+          
+          this.updateCategoriesMenu();
         }
+
       },error => {
         console.log(error);
       }
@@ -89,6 +97,9 @@ export class ManageCategoriesComponent implements OnInit {
         this.categoryLanguage = {
           name_language:"",
           language_symbol:""
+        };
+        if(this.updateCategoriesMenu){
+          this.updateCategoriesMenu();
         }
       },error => {
         console.log(error);

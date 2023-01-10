@@ -5,13 +5,15 @@
 
 	<div id="lang-selector">
 		<div *ngFor="let lang of langs" class="lang">
-			<button (click)="changeLang(lang)">{{lang}}</button>
+			<button (click)="changeLang(lang)" [class.language-selected]=" languageParam == lang ">{{lang}}</button>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 	<hr>
 	<!--Listado De entradas-->
-	<post-list 	[posts]="posts"
+	<post-list 	
+				[panelAdmin]="true"
+				[posts]="posts"
 				[identity]="identity"
 				[url]="url"
 				[language] = "languageParam"

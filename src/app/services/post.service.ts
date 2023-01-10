@@ -39,14 +39,14 @@ export class PostService{
 		return this._http.get(this.url + 'post-language/' + id + '/' + language, {headers:headers});	
 	}
 
-	update(token, post, id):Observable<any>{
+	update(token, post, postId:number, postLanguageId:number):Observable<any>{
 		let json = JSON.stringify(post);
 		let params_sin_encode = "json="+(json);
 		let params = "json="+encodeURIComponent(json);
 		//console.log(params_sin_encode);
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization', token);
-		return this._http.put(this.url + 'post/' + id, params, {headers: headers});
+		return this._http.put(this.url + 'post/update/' + postLanguageId + "/" + postId, params, {headers: headers});
 	}
 
 	delete(token, id){

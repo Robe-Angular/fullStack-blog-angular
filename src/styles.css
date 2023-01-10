@@ -62,3 +62,9 @@ footer{
 	margin-top: 50px;
 	color: lightgray;
 }
+
+
+.language-selected {
+    color:white;
+    background-color: rgb(56, 53, 53);
+}

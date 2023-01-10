@@ -4,6 +4,7 @@ import { CategoryService } from './services/category.service';
 import { LoadingService } from './services/loading.service';
 import { I18nServiceService } from './services/i18n-service.service';
 import { global } from  './services/global';
+import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
 
 @Component({
   selector: 'app-root',
@@ -49,10 +50,21 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 		this.token = this._userService.getToken();		
 	}
 
+	updateCategoryMenu(componentRef){
+		console.log('function calledUpdate');
+		if(!(componentRef instanceof ManageCategoriesComponent)){	
+			return;
+		}
+		componentRef.updateCategoriesMenu= this.getCategoriesFunction;
+	}
+
+	getCategoriesFunction = () => {
+		
+		this.getCategories();
+	}
+
 	getCategories(){
 		console.log($localize.locale);
-		
-		
 		let languageParam = this._i18nService.getlocale();
 		this._categoryService.getCategoriesLanguage(languageParam).subscribe(
 			response =>{

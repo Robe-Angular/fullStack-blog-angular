@@ -63,7 +63,7 @@
   </div>
 </nav><!--Fin de barra de navegación-->
 <!--Contenido-->
-<router-outlet>
+<router-outlet (activate)="updateCategoryMenu($event)">
   
 </router-outlet>
 <hr>

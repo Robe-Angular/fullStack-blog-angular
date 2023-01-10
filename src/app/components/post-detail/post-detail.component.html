@@ -2,18 +2,27 @@
 <div class="col-md-12" *ngIf="!postLanguage">
 	Cargando...
 </div>
+
 <div class="col-md-12 mt-3" id="post-container" *ngIf="postLanguage">
+	<div id="lang-selector">
+		<div *ngFor="let lang of langs" class="lang">
+			<button (click)="changeLang(lang)" [class.language-selected]=" languageParam == lang ">{{lang}}</button>
+		</div>
+	</div>
+	<div class="clearfix">
+
+	</div>
 	<h1>
 		{{postLanguage.title_language}}
 	</h1>	
 	<hr/>
 	<p>
-		{{post.category.name}}<!--<a [routerLink]="['/perfil',post.user.id]">{{post.user.name}} {{post.user.surname}}</a>-->
+		{{postCategoryName}}<!--<a [routerLink]="['/perfil',post.user.id]">{{post.user.name}} {{post.user.surname}}</a>-->
 	</p>
 	<hr/>
 	<div class="post-wrapper" >
-		<div class="post-content" [innerHtml]="post.content | sanitizeHTML">
-			{{post.content}}
+		<div class="post-content" [innerHtml]="postLanguage.content_language | sanitizeHTML">
+			{{postLanguage.content_language}}
 		</div>		
 	</div>
 	<div class="fb-comments" data-href="http://kolodyo.pw/entrada/1" 

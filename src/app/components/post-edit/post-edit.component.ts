@@ -110,7 +110,13 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		//console.log(this.htmlDoc);
 		//this.post.content = this.htmlDoc;
 		this.postLanguage.content_language = this.htmlDoc;
-		this._postService.update(this.token, this.post, this.post.id).subscribe(
+		let submitData = {
+			title_language: this.postLanguage.title_language,
+			content_language: this.postLanguage.content_language,
+			category_id: this.post.category_id
+		}
+
+		this._postService.update(this.token, submitData, this.post.id,this.postLanguage.id).subscribe(
 			response =>{
 				if(response.status == 'success'){
 					this.status = 'success';
@@ -175,6 +181,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 
 						this.htmlDoc = response.post[0].posts_language[0].content_language;
 						this.postLanguage = response.post[0].posts_language[0];
+						this.post = response.post[0];
 						if(!init){
 							this.htmlDoc = this.htmlLocal;
 						}		
@@ -231,7 +238,20 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	}
 
 	changeLanguage(lang:string){
-		this.getPost(false,lang);
+		this.languageParam = lang;
+		this.postLoaded = false;
+		this.getPost(true,this.languageParam);
+	}
+
+	publishPost(postLanguageId,publish){
+		
+		this._postService.publishPost(this.token,publish,postLanguageId).subscribe(
+			response => {
+				this.getPost(false,this.languageParam);
+			},error => {
+				console.log(error);
+			}
+		)
 	}
 
 }

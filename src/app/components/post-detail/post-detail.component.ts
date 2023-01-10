@@ -20,6 +20,8 @@ export class PostDetailComponent implements OnInit,AfterViewChecked {
 	public token:string;
 	public languageParam:string;
 	public post:Post;
+	public postCategoryName: string;
+	public langs: Array<string>;
 	
 
 	constructor(
@@ -34,15 +36,16 @@ export class PostDetailComponent implements OnInit,AfterViewChecked {
 		this.url = global.url;
 		this.token = this._userService.getToken();
 		this.languageParam = this._i18nService.getlocale();
+		this.postCategoryName = "";
+		this.langs = global.langs;
 	}
 
 	ngAfterViewChecked(){
-		window.FB.XFBML.parse();
+		FB.XFBML.parse(document.getElementById('post-container'));
 	}
 	
 	ngOnInit(): void {		
-		this.getPost(this.languageParam);
-		
+		this.getPost(this.languageParam);		
 	}
 
 	getPost(language:string){
@@ -53,9 +56,11 @@ export class PostDetailComponent implements OnInit,AfterViewChecked {
 			this._postService.getPost(id,this.token,language).subscribe(
 				response => {
 					if(response.status = 'success'){
-						this.postLanguage = response.post;
-						this.postLanguage.content_language = response.post.content_language;
-						FB.XFBML.parse(document.getElementById('post-container'));
+						console.log(response)
+						this.postLanguage = response.post[0].posts_language[0];					
+
+						this.postCategoryName = response.post[0].category.categories_language[0].name_language;
+						//FB.XFBML.parse(document.getElementById('post-container'));
 						console.log(this.postLanguage);
 					}else{
 						this._router.navigate(['inicio']);
@@ -67,5 +72,10 @@ export class PostDetailComponent implements OnInit,AfterViewChecked {
 				}	
 			)
 		});
+	}
+
+	changeLang(lang){
+		this.languageParam = lang;
+		this.getPost(this.languageParam);
 	}
 }

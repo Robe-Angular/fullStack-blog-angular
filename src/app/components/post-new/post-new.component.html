@@ -17,8 +17,10 @@
 	</div>
 	<div id="lang-selector" *ngIf="isEdit">
 		<div *ngFor="let lang of langs" class="lang">
-
-			<button data-toggle="modal" [attr.data-target]="'#myModal'+lang">{{lang}}</button>
+			
+			<button data-toggle="modal" [class.language-selected]=" languageParam == lang "
+			
+			 [attr.data-target]="'#myModal'+lang">{{lang}}</button>
 
 			<div class="modal fade" id="{{'myModal'+lang}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -88,6 +90,7 @@
 					<button type="button" class="btn btn-danger ml-2" (click)="deleteImage(imageOnPost.id)">
 						Borrar
 					</button>
+
 					<button type="button" class="btn btn-primary ml-2" [class.btn-info]="imageOnPost.id==post.image" (click)="setMainImage(imageOnPost.id)">
 						M
 					</button>
@@ -105,6 +108,15 @@
 			</angular-file-uploader>
 		</div>
 		<input type="submit" value="Guardar" class="btn btn-success" [disabled]="postNew.invalid"/>
+
+		<button type="button" class="btn btn-warning" (click)="publishPost(postLanguage.id,true)" *ngIf="!post.posts_language[0].published">
+			Publicar
+		</button>
+		<button type="button" class="btn btn-secondary" (click)="publishPost(postLanguage.id,false)" *ngIf="post.posts_language[0].published">
+			Ocultar
+		</button>
+
+		
 	</form>
 	
 <br>

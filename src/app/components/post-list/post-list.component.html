@@ -1,7 +1,7 @@
 <div class="card-columns">
 	<div *ngFor="let post of posts">
 		
-		<article class="card w-100" *ngIf="post.posts_language.length > 0">			
+		<article class="card w-100" *ngIf="post.posts_language.length > 0">
 			<div class="card-header" >
 				<h3>
 					<a [routerLink]="['/entrada',post.id]">{{post.posts_language[0].title_language | shortString : 12}}</a>
@@ -11,18 +11,18 @@
 							<img src="{{url + 'post/image/' + post.image.description}}" class="w-100"/>
 						</div>
 						<div class="post-image w-100" *ngIf="!post.image">
-							<img src="assets/images/default.jpg" alt="plchldr.co" class="w-100 h-200" height="200" />
+							<img src="assets/images/default.jpg" alt="default image" class="w-100 h-200" height="200" />
 						</div>
 						<!--Botones de acción-->
-						<div class="post-buttons mt-3">
+						<div class="post-buttons mt-3" *ngIf="panelAdmin">
 							<a [routerLink]="['/entrada',post.id]" class="btn btn-success mr-2">Leer</a>
 							<span *ngIf="identity && identity.sub == 1">
 								<a [routerLink]="['/editar-entrada', post.id]" class="btn btn-warning mr-2">Editar</a>
 
-								<button type="button" class="btn btn-warning" (click)="publish(post.posts_language[0].id,true)" *ngIf="!post.published">
+								<button type="button" class="btn btn-warning" (click)="publish(post.posts_language[0].id,true)" *ngIf="!post.posts_language[0].published">
 									Publicar
 								</button>
-								<button type="button" class="btn btn-secondary" (click)="publish(post.id,false)" *ngIf="post.published">
+								<button type="button" class="btn btn-secondary" (click)="publish(post.posts_language[0].id,false)" *ngIf="post.posts_language[0].published">
 									Ocultar
 								</button>
 								<!-- Button trigger modal -->

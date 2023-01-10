@@ -5,7 +5,6 @@ export class PostLanguage{
         public content_language: string,
         public language_symbol:string,
         public createdAt: any,
-        public updatedAt: any
-        
+        public updatedAt: any        
     ){}
 }

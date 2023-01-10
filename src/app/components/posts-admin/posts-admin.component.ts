@@ -63,7 +63,7 @@ export class PostsAdminComponent implements OnInit {
 	deletePost(id){
 		this._postService.delete(this.token, id).subscribe(
 			response => {
-				this.getPosts(this.locale_language);
+				this.getPosts(this.languageParam);
 			},error =>{
 
 			}
@@ -76,7 +76,7 @@ export class PostsAdminComponent implements OnInit {
 		console.log($event);
 		this._postService.publishPost(this.token,publish,postId).subscribe(
 			response => {
-				this.getPosts(this.locale_language);
+				this.getPosts(this.languageParam);
 			},error => {
 				console.log(error);
 			}

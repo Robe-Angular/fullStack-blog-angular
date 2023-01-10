@@ -12,6 +12,7 @@ export class PostListComponent implements OnInit {
 	@Input() posts;
 	@Input() identity;
 	@Input() url;
+	@Input() panelAdmin;
 	@Input() set language(value:string){
 		this._language = value;
 		
