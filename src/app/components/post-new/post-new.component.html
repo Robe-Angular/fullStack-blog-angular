@@ -82,6 +82,7 @@
 		<div class="form-group" *ngIf="isEdit && post.id">
 			<label for="image">Images</label>
 			<div *ngIf="isEdit">
+
 				<div *ngFor="let imageOnPost of imagesOnPost" class="imageOnPost">
 					<img src="{{url + 'post/image/' + imageOnPost.description}}" class="avatar_edit"/>
 					<div class="clearfix">
@@ -98,6 +99,15 @@
 						Descripción
 					</button>
 					<input type="text" [(ngModel)]="imageOnPost.description" [ngModelOptions]="{standalone: true}"/>
+
+					<button type="button" class="btn btn-info ml-2" (click)="showImageDetail(imageOnPost.id)">
+						Detalles
+					</button>
+					<div *ngIf="activatedImage == imageOnPost.id">
+						
+					</div>
+
+
 				</div>
 				
 			</div>

@@ -13,6 +13,11 @@ import { SafeHtml } from '@angular/platform-browser';
 
 import { I18nServiceService } from 'src/app/services/i18n-service.service';
 
+interface ItoSubmitImageLanguageName{
+	description_language: string;
+	language_symbol:string;
+}
+
 @Component({
   selector: 'app-post-edit',
   templateUrl: '../post-new/post-new.component.html',
@@ -40,6 +45,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public langs: string[];
 	public languageParam:string;
 	public postLanguage: PostLanguage;
+	public activatedImage: string;
 
 	public afuConfig = {
 	    multiple: false,
@@ -92,6 +98,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.htmlLocal = '';
 		this.langs = global.langs;
 		this.languageParam = this._i18nService.getlocale();
+		this.activatedImage = "";
 	}
 
 	ngOnInit(): void {
@@ -152,6 +159,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	}
 
 	imageUpload(data){
+		console.log(data.response);
 		let image_data = (JSON.parse(data.response));
 		this.post.image = image_data.image;
 		let imageToRegister = {
@@ -227,6 +235,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 			}
 		)
 	}
+
 	deleteImage(imageOPostId){
 		this._postService.deleteImage(this.token,imageOPostId).subscribe(
 			response => {
@@ -252,6 +261,10 @@ export class PostEditComponent implements OnInit, OnDestroy {
 				console.log(error);
 			}
 		)
+	}
+
+	showImageDetail(imageOnPostId){
+		this.activatedImage = imageOnPostId;
 	}
 
 }
