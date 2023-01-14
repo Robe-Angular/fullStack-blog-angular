@@ -105,5 +105,14 @@ export class PostService{
 		
 		return this._http.get(this.url + 'post/publish/'+ postId + '/' + booleanValueString, {headers:headers});
 	}
+
+	saveImageLanguage(token,imageLanguage,imageId){
+		let json = JSON.stringify(imageLanguage);
+		let params = "json="+encodeURIComponent(json);
+
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization', token);
+		return this._http.put(this.url + 'save-image-language/' + imageId, params , {headers: headers});
+	}
 	
 }

@@ -46,6 +46,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public languageParam:string;
 	public postLanguage: PostLanguage;
 	public activatedImage: string;
+	public imageLanguageToSubmit:ItoSubmitImageLanguageName;
 
 	public afuConfig = {
 	    multiple: false,
@@ -99,6 +100,10 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.langs = global.langs;
 		this.languageParam = this._i18nService.getlocale();
 		this.activatedImage = "";
+		this.imageLanguageToSubmit = {
+			description_language: "",
+			language_symbol: ""
+		}
 	}
 
 	ngOnInit(): void {
@@ -267,4 +272,13 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.activatedImage = imageOnPostId;
 	}
 
+	submitImageLanguageDescription(imageId){
+		this._postService.saveImageLanguage(this.token,this.imageLanguageToSubmit,imageId).subscribe(
+			response => {
+				
+			},error => {
+
+			}
+		)
+	}
 }

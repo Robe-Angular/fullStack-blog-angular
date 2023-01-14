@@ -103,8 +103,16 @@
 					<button type="button" class="btn btn-info ml-2" (click)="showImageDetail(imageOnPost.id)">
 						Detalles
 					</button>
-					<div *ngIf="activatedImage == imageOnPost.id">
-						
+					<div *ngIf="activatedImage == imageOnPost.id" class="ml-4">
+						<label for="descriptionLanguage">Descripción en Idioma</label>
+						<input type="text" name="descriptionLanguage" [(ngModel)]="imageLanguageToSubmit.description_language"/>
+
+						<label for="languageSymbol">Símbolo del idioma</label>
+						<input type="text" name="languageSymbol" [(ngModel)]="imageLanguageToSubmit.language_symbol"/>
+
+						<button type="button" class="btn btn-success ml-2" (click)="submitImageLanguageDescription(imageOnPost.id)">
+							Guardar
+						</button>
 					</div>
 
 
