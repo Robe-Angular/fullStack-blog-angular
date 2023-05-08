@@ -33,10 +33,21 @@ export class PostService{
 		return this._http.get(this.url + 'post-lang' + '/' + language, {headers:headers});
 	}
 
-	getPost(id,token,language:string):Observable<any>{
+	getPost(id,token):Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 			.set('Authorization',token);
-		return this._http.get(this.url + 'post-language/' + id + '/' + language, {headers:headers});	
+		return this._http.get(this.url + 'post-language/' + id, {headers:headers});	
+	}
+
+	getpostsLanguageOnPost(postId:number):Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+		return this._http.get(this.url + 'posts-language-on-post/' + postId, {headers:headers});
+	}
+
+	getpostsLanguageOnPostAdmin(postId:number,token):Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+			.set('Authorization',token);
+		return this._http.get(this.url + 'posts-language-on-post-admin/' + postId, {headers:headers});
 	}
 
 	update(token, post, postId:number, postLanguageId:number):Observable<any>{
@@ -114,5 +125,7 @@ export class PostService{
 			.set('Authorization', token);
 		return this._http.put(this.url + 'save-image-language/' + imageId, params , {headers: headers});
 	}
+
+	
 	
 }

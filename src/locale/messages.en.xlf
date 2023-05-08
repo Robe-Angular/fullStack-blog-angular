@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="es-MX" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="3060916407070397745" datatype="html">
+        <source> Cargando... </source>
+        <target state="new">Loading</target>
+      </trans-unit>
+      <trans-unit id="1210871264696429669" datatype="html">
+        <source> No hay posts en esta categoría </source>
+        <target state="new">Any posts in category </target>
+      </trans-unit>
+      <trans-unit id="7279542975998671718" datatype="html">
+        <source> Crea una nueva categoría para el blog </source>
+        <target state="new">Create new category for the blog </target>
+      </trans-unit>
+      <trans-unit id="8232493852392498675" datatype="html">
+        <source> La categoría se ha creado correctamente </source>
+        <target state="new">Category was created successfully </target>
+      </trans-unit>
+      <trans-unit id="4279060082233174430" datatype="html">
+        <source> La categoría no se ha guardado </source>
+        <target state="new">Category was not saved </target>
+      </trans-unit>
+      <trans-unit id="2702769239797460498" datatype="html">
+        <source>Descripción</source>
+        <target>Description </target>
+      </trans-unit>
+      <trans-unit id="896445358475007116" datatype="html">
+        <source> La descripción de la categoría no es válida. </source>
+        <target state="new"> Category description is invalid </target>
+      </trans-unit>
+      <trans-unit id="1372173599787735409" datatype="html">
+        <source>Guardar</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="72805237540649629" datatype="html">
+        <source>Identifícate</source>
+        <target>Identify</target>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="1956766103276317575" datatype="html">
+        <source> El email no es válido </source>
+        <target>E-mail is invalid</target>
+      </trans-unit>
+      <trans-unit id="7132730488496169673" datatype="html">
+        <source>Contraseña</source>
+        <target>Passsword</target>
+      </trans-unit>
+      <trans-unit id="5733663912193127752" datatype="html">
+        <source> La contraseña no es válida </source>
+        <target>Password is invalid</target>
+      </trans-unit>
+      <trans-unit id="4022851895676193978" datatype="html">
+        <source>Identificarse</source>
+        <target>Identify</target>
+      </trans-unit>
+      <trans-unit id="3003917280198562456" datatype="html">
+        <source> Eliminar </source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="328684216011022288" datatype="html">
+        <source>Detalles</source>
+        <target>Details</target>
+      </trans-unit>
+      <trans-unit id="664205920820858149" datatype="html">
+        <source>¿Seguro que quieres borrar esta entrada?</source>
+        <target>Are you sure you want to delete this post?</target>
+      </trans-unit>
+      <trans-unit id="6076706130921722375" datatype="html">
+        <source> Vas a borrar definitivamente <x id="INTERPOLATION" equiv-text="{{category.description}}"/> </source>
+        <target>You will definitively delete <x id="INTERPOLATION" equiv-text="{{category.description}}"/></target>
+      </trans-unit>
+      <trans-unit id="4798961227159743968" datatype="html">
+        <source>Cerrar</source>
+      </trans-unit>
+      <trans-unit id="7099780434896458019" datatype="html">
+        <source>Borrar</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="4333733863543260974" datatype="html">
+        <source>Leer</source>
+        <target>Read</target>
+      </trans-unit>
+      <trans-unit id="2153980152639237955" datatype="html">
+        <source>Editar</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="4944173749764822355" datatype="html">
+        <source> Publicar </source>
+        <target>Post</target>
+      </trans-unit>
+      <trans-unit id="7509596783505333696" datatype="html">
+        <source> Ocultar </source>
+        <target>Hide</target>
+      </trans-unit>
+      <trans-unit id="729070192376227757" datatype="html">
+        <source> Borrar </source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="2546802740650935388" datatype="html">
+        <source> Añade un nuevo artículo al Blog </source>
+        <target>Add a new article to the Blog</target>
+      </trans-unit>
+      <trans-unit id="8275053223311091881" datatype="html">
+        <source> Modifica el post: <x id="INTERPOLATION" equiv-text="{{post.title}}"/> </source>
+        <target>Modify: <x id="INTERPOLATION" equiv-text="{{post.title}}"/> </target>
+      </trans-unit>
+      <trans-unit id="7186489253584917545" datatype="html">
+        <source> Los datos se han guardado correctamente </source>
+        <target>Data has been saved successfully</target>
+      </trans-unit>
+      <trans-unit id="3205610479324834556" datatype="html">
+        <source> Los datos no se han guardado </source>
+        <target>Data has not been saved</target>
+      </trans-unit>
+      <trans-unit id="4584358032228939370" datatype="html">
+        <source> Vas a cambiar el idioma a <x id="INTERPOLATION" equiv-text="{{lang}}"/> podrías perder datos </source>
+        <target> You will change language to<x id="INTERPOLATION" equiv-text="{{lang}}"/> you could lose data </target>
+      </trans-unit>
+      <trans-unit id="8242485735462684029" datatype="html">
+        <source>Cambiar</source>
+        <target>Change</target>
+      </trans-unit>
+      <trans-unit id="8331458230102334089" datatype="html">
+        <source>Título</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="6355817181364671701" datatype="html">
+        <source> El título no es válido </source>
+        <target>Title is invalid</target>
+      </trans-unit>
+      <trans-unit id="5990722728973226850" datatype="html">
+        <source>Contenido</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="9062439587784329237" datatype="html">
+        <source> El contenido no es válido </source>
+        <target>Content is invalid</target>
+      </trans-unit>
+      <trans-unit id="3814487419663470116" datatype="html">
+        <source> Categoría </source>
+        <target> Category </target>
+      </trans-unit>
+      <trans-unit id="414887388288176527" datatype="html">
+        <source>Images</source>
+        <target> Images </target>
+      </trans-unit>
+      <trans-unit id="5283377349863536025" datatype="html">
+        <source> Descripción </source>
+        <target> Description </target>
+      </trans-unit>
+      <trans-unit id="3544820477774140944" datatype="html">
+        <source> Detalles </source>
+        <target> Details </target>
+      </trans-unit>
+      <trans-unit id="7456762148898839832" datatype="html">
+        <source>Descripción en Idioma</source>
+        <target> Description in language </target>
+      </trans-unit>
+      <trans-unit id="404884991954097138" datatype="html">
+        <source>Símbolo del idioma</source>
+        <target> Language Symbol </target>
+      </trans-unit>
+      <trans-unit id="4113182804267037649" datatype="html">
+        <source> Guardar </source>
+        <target> Save </target>
+      </trans-unit>
+      <trans-unit id="7597261930406149764" datatype="html">
+        <source> Inicio </source>
+        <target state="new"> Start page </target>
+      </trans-unit>
+      <trans-unit id="1072661597479630789" datatype="html">
+        <source>Crear entrada</source>
+        <target state="new">Create post</target>
+      </trans-unit>
+      <trans-unit id="4845449000239959379" datatype="html">
+        <source>Crear Categoría</source>
+        <target state="new">Create category</target>
+      </trans-unit>
+      <trans-unit id="5857310891239122148" datatype="html">
+        <source>Administrar Categorías</source>
+        <target state="new">Manage categories</target>
+      </trans-unit>
+      <trans-unit id="7336073135201335411" datatype="html">
+        <source>Administrar posts</source>
+        <target state="new">Manage posts</target>
+      </trans-unit>
+      <trans-unit id="6741067624647576049" datatype="html">
+        <source>Ajustes</source>
+        <target state="new">Settings</target>
+      </trans-unit>
+      <trans-unit id="7561060183100598492" datatype="html">
+        <source>Salir</source>
+        <target state="new">Exit</target>
+      </trans-unit>
+      <trans-unit id="3988820710677526702" datatype="html">
+        <source>Crear nueva categoría</source>
+        <target state="new">New category</target>
+      </trans-unit>
+      <trans-unit id="1926157928707021468" datatype="html">
+        <source>Inicio</source>
+        <target state="new">Start page</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

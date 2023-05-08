@@ -1,51 +1,50 @@
 <div class="card-columns">
-	<div *ngFor="let post of posts">
-		
-		<article class="card w-100" *ngIf="post.posts_language.length > 0">
+	<div *ngFor="let postLanguage of posts">	
+		<article class="card">
 			<div class="card-header" >
 				<h3>
-					<a [routerLink]="['/entrada',post.id]">{{post.posts_language[0].title_language | shortString : 12}}</a>
+					<a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">{{postLanguage.title_language | shortString : 12}}</a>
 					<div class="card-body">
 						<!--Imagen-->
-						<div class="post-image w-100" *ngIf="post.image">
-							<img src="{{url + 'post/image/' + post.image.description}}" class="w-100"/>
+						<div class="post-image w-100" *ngIf="postLanguage.post.image != null">
+							<img src="{{url + 'post/image-language/' + postLanguage.post.image.images_language[0].description_language}}" class="w-100"/>
 						</div>
-						<div class="post-image w-100" *ngIf="!post.image">
+						<div class="post-image w-100" *ngIf="postLanguage.post.image == null">
 							<img src="assets/images/default.jpg" alt="default image" class="w-100 h-200" height="200" />
 						</div>
 						<!--Botones de acción-->
 						<div class="post-buttons mt-3" *ngIf="panelAdmin">
-							<a [routerLink]="['/entrada',post.id]" class="btn btn-success mr-2">Leer</a>
+							<a [routerLink]="['/posts',postLanguage.id,postLanguage.title_language]" class="btn btn-success mr-2" i18n>Leer</a>
 							<span *ngIf="identity && identity.sub == 1">
-								<a [routerLink]="['/editar-entrada', post.id]" class="btn btn-warning mr-2">Editar</a>
+								<a [routerLink]="['/editar-entrada', postLanguage.id]" class="btn btn-warning mr-2" i18n>Editar</a>
 
-								<button type="button" class="btn btn-warning" (click)="publish(post.posts_language[0].id,true)" *ngIf="!post.posts_language[0].published">
+								<button type="button" class="btn btn-warning" (click)="publish(postLanguage.id,true)" *ngIf="!postLanguage.published" i18n>
 									Publicar
 								</button>
-								<button type="button" class="btn btn-secondary" (click)="publish(post.posts_language[0].id,false)" *ngIf="post.posts_language[0].published">
+								<button type="button" class="btn btn-secondary" (click)="publish(postLanguage.id,false)" *ngIf="postLanguage.published" i18n>
 									Ocultar
 								</button>
 								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal'+post.id">
+								<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal'+postLanguage.id" i18n>
 									Borrar
 								</button>
 
 								<!-- Modal -->
-								<div class="modal fade" id="{{'myModal'+post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal fade" id="{{'myModal'+postLanguage.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="{{'myModal'+post.id}}">¿Seguro que quieres borrar esta entrada?</h5>
+												<h5 class="modal-title" id="{{'myModal'+postLanguage.id}}" i18n>¿Seguro que quieres borrar esta entrada?</h5>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
-											<div class="modal-body">
-												Vas a borrar definitivamente {{post.posts_language[0].title}}
+											<div class="modal-body" i18n>
+												Vas a borrar definitivamente {{postLanguage.title_language}}
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal">Close</button>
-												<a (click)="deletePost(post.id)" class="btn btn-danger" data-dismiss="modal">Borrar</a>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal" i18n>Close</button>
+												<a (click)="deletePost(postLanguage.post.id)" class="btn btn-danger" data-dismiss="modal" i18n>Borrar</a>
 											</div>
 										</div>
 									</div>

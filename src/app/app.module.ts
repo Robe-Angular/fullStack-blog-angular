@@ -33,6 +33,7 @@ import { NetworkInterceptor } from './interceptors/network.interceptor';
 import { LoadingService } from './services/loading.service';
 import { PostsAdminComponent } from './components/posts-admin/posts-admin.component';
 import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
+import { UrlPostDescriptionPipe } from './pipes/url-post-description.pipe';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ManageCategoriesComponent } from './components/manage-categories/manage
     SanitizeHTMLPipe,
     ShortStringPipe,
     PostsAdminComponent,
-    ManageCategoriesComponent
+    ManageCategoriesComponent,
+    UrlPostDescriptionPipe
   ],
   imports: [
     routing,

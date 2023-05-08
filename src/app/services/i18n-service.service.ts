@@ -11,6 +11,7 @@ export class I18nServiceService {
   getlocale(){
     let locale = $localize.locale;
     let languageParam = locale == undefined ? window.navigator.language: locale;
-    return languageParam;
+    let zeroOfSplitted = languageParam.split('-')[0];
+    return zeroOfSplitted;
   }
 }

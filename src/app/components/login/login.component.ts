@@ -11,7 +11,7 @@ import {UserService} from '../../services/user.service';
   providers: [UserService]
 })
 export class LoginComponent implements OnInit {
-  public page_title:string;
+  
   public user: User;
   public status:string;
   public token;
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private _route: ActivatedRoute
 
   ) { 
-  	this.page_title = 'identifícate';
+  	
     this.user = new User(1, '', '','ROLE-USER', '', '', '', '');
   }
 

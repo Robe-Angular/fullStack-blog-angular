@@ -1,12 +1,12 @@
 
-<div class="col-md-12" *ngIf="!postLanguage">
+<div class="col-md-12" *ngIf="!postLanguage" i18n>
 	Cargando...
 </div>
 
 <div class="col-md-12 mt-3" id="post-container" *ngIf="postLanguage">
 	<div id="lang-selector">
-		<div *ngFor="let lang of langs" class="lang">
-			<button (click)="changeLang(lang)" [class.language-selected]=" languageParam == lang ">{{lang}}</button>
+		<div *ngFor="let post of otherPostsLanguage" class="lang">
+			<button (click)="changeLang(post.id)" [class.language-selected]=" idSelected == post.id ">{{post.language_symbol}}</button>
 		</div>
 	</div>
 	<div class="clearfix">
@@ -25,7 +25,7 @@
 			{{postLanguage.content_language}}
 		</div>		
 	</div>
-	<div class="fb-comments" data-href="http://kolodyo.pw/entrada/1" 
+	<div class="fb-comments" data-href="https://ng-morning-nr4.me"
 	data-width="100" 
 	data-numposts="5"
 	data-mobile="false">

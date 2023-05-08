@@ -71,9 +71,6 @@ export class AppComponent implements OnInit, DoCheck, AfterViewChecked {
 				if(response.status=='success'){
 					
 					this.categoriesLanguage = response.categories;
-					console.log(response);
-					console.log(this.categoriesLanguage);
-					console.log(languageParam);
 				}
 				
 			},

@@ -1,13 +1,13 @@
-<div class="loading" *ngIf="!posts">
+<div class="loading" *ngIf="!posts" i18n>
 	Cargando...
 </div>
 <div class="container-fluid mt-3" *ngIf="posts">
-	<h1>{{page_title}}</h1>
+	<h1 i18n>Inicio</h1>
 	<hr>
 	<!--Listado De entradas-->
 	<post-list 	[posts]="posts"
 				[identity]="identity"
 				[url]="url"
-				(eliminar) = "deletePost($event)"></post-list> 
+				(eliminar) = "deletePost($event)"></post-list>
 
 </div>

@@ -33,7 +33,7 @@ const appRoutes: Routes = [
 	{path: 'crear-categoria', component: CategoryNewComponent, canActivate: [IdentityGuard]},
 	{path: 'administrar-categorias', component: ManageCategoriesComponent, canActivate: [IdentityGuard]},
 	{path: 'crear-entrada', component: PostNewComponent, canActivate: [IdentityGuard]},
-	{path: 'entrada/:id', component: PostDetailComponent},
+	{path: 'posts/:id/:description', component: PostDetailComponent},
 	{path: 'editar-entrada/:id', component: PostEditComponent, canActivate: [IdentityGuard]},
 	
 	{path: 'categoria/:id', component: CategoryDetailComponent},

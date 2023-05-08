@@ -1,14 +1,13 @@
-<div class="loading" *ngIf="!category">
+<div class="loading"  i18n *ngIf="!category">
 	Cargando...
 </div>
 <div class="container-fluid mt-3" *ngIf="category">
 	<h1>{{category.name}}</h1>
 	<hr>
 
-<div class="alert alert-warning" *ngIf="postsLoaded && posts.length == 0">
+<div class="alert alert-warning" i18n *ngIf="postsLoaded && posts.length == 0">
 	No hay posts en esta categoría
 </div>
-
 <div class="container-fluid mt-3" *ngIf="posts.length > 0">
 	<hr>
 	<!--Listado De entradas-->

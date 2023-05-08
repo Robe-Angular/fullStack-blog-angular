@@ -7,6 +7,13 @@
   "newProjectRoot": "projects",
   "projects": {
     "blog-angular": {
+      "i18n":{
+        "sourceLocale":"es-MX",
+        "locales":{
+          "en-US": "src/locale/messages.en.xlf",
+          "de-DE": "src/locale/messages.de.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,6 +24,9 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/blog-angular",
+            "localize":[
+              "de-DE"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -85,9 +95,15 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "blog-angular:build"
+            "browserTarget": "blog-angular:build",
+            "format": "xlf",
+            "outputPath": "src/locale",
+            "targetFiles": [
+              "messages.en.xlf",
+              "messages.de.xlf"
+            ]
           }
         },
         "test": {

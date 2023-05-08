@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CategoryService } from '../../services/category.service';
 import { PostService } from '../../services/post.service';
+import { ImageService } from '../../services/image.service';
 import { Post } from '../../models/post';
 import { PostLanguage } from 'src/app/models/post_language';
 import { global } from '../../services/global';
@@ -42,11 +43,13 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	public mainImage:string;
 	public htmlDoc:string;
 	public htmlLocal:string;
-	public langs: string[];
-	public languageParam:string;
+	
 	public postLanguage: PostLanguage;
-	public activatedImage: string;
+	public activatedImage: number;
 	public imageLanguageToSubmit:ItoSubmitImageLanguageName;
+	public postLanguageId:number;
+	public postsLanguageOnPost:Array<any>;
+	public imagesLanguageOnSelected:Array<any>;
 
 	public afuConfig = {
 	    multiple: false,
@@ -73,7 +76,9 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		private _userService: UserService,
 		private _categoryService: CategoryService,
 		private _postService: PostService,
+		private _imageService:ImageService,
 		private _i18nService: I18nServiceService
+
 	) {
 		this.page_title = 'Editar una entrada';
 		this.identity = this._userService.getIdentity();
@@ -97,25 +102,30 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		this.postLoaded = false;		
 		this.htmlDoc = '';
 		this.htmlLocal = '';
-		this.langs = global.langs;
-		this.languageParam = this._i18nService.getlocale();
-		this.activatedImage = "";
+		this.activatedImage = 0;
 		this.imageLanguageToSubmit = {
 			description_language: "",
 			language_symbol: ""
 		}
+		this.postLanguageId = 0;
+		this.postsLanguageOnPost = [];
 	}
 
 	ngOnInit(): void {
-		this.getCategories();
-		this.post = new Post(1, 1, '',  null);
-		this.postLanguage = new PostLanguage(1,"","","",null,null);
-		this.getPost(true,this.languageParam);
+		this._route.params.subscribe(params => {
+			this.postLanguageId = +params['id'];
+			console.log(this.postLanguageId);
+			this.getCategories();
+			this.getPost(true,this.postLanguageId);			
+		});
+		
+		
 
 	}
 
 	ngOnDestroy(): void {
 		this.editor.destroy();
+		
 	}
 
 	onSubmit(form){
@@ -173,28 +183,35 @@ export class PostEditComponent implements OnInit, OnDestroy {
 		}
 		this._postService.registerImage(this.token,imageToRegister).subscribe(
 			response => {
-				this.getPost(false,this.languageParam);
+				this.getPost(false,this.postLanguageId);
 			},error => {
 
 			}
 		)
 	}
 
-	getPost(init:boolean=false,language:string){
+	getPost(init:boolean=false,id:number){
 		if(!init){
 			this.htmlLocal = this.htmlDoc;
 		}		
 		//Sacar el id del post de la URL
-		this._route.params.subscribe(params => {
-			let id = +params['id'];
+		
 			//Petición Ajax para sacar los datos
-			this._postService.getPost(id,this.token,language).subscribe(
+			this._postService.getPost(id,this.token).subscribe(
 				response => {
 					if(response.status = 'success'){
 
-						this.htmlDoc = response.post[0].posts_language[0].content_language;
-						this.postLanguage = response.post[0].posts_language[0];
-						this.post = response.post[0];
+						this.htmlDoc = response.post.content_language;
+						this.postLanguage = response.post;
+						this.post = response.post.post;
+						this._postService.getpostsLanguageOnPostAdmin(this.post.id,this.token).subscribe(
+							response => {
+								this.postsLanguageOnPost = response.posts_language;
+								console.log(this.postsLanguageOnPost);
+							},error => {
+								console.log(error);
+							}	
+						);
 						if(!init){
 							this.htmlDoc = this.htmlLocal;
 						}		
@@ -218,14 +235,14 @@ export class PostEditComponent implements OnInit, OnDestroy {
 					console.log(error);
 					this._router.navigate(['inicio']);
 				}	
-			)
-		});
+			);
+		
 		
 	}
 	setMainImage(imageId){
 		this._postService.setMainImage(this.token,imageId).subscribe(
 			response => {
-				this.getPost(false,this.languageParam);
+				this.getPost(false,this.postLanguageId);
 			},error => {
 				console.log(error);
 			}
@@ -234,7 +251,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	submitDescription(imageId,imageOnPost){
 		this._postService.changeImageDescription(this.token,imageId,imageOnPost).subscribe(
 			response => {
-				this.getPost(false,this.languageParam);
+				this.getPost(false,this.postLanguageId);
 			},error => {
 				console.log(error);
 			}
@@ -244,24 +261,24 @@ export class PostEditComponent implements OnInit, OnDestroy {
 	deleteImage(imageOPostId){
 		this._postService.deleteImage(this.token,imageOPostId).subscribe(
 			response => {
-				this.getPost(false,this.languageParam);
+				this.getPost(false,this.postLanguageId);
 			},error => {
 				console.log(error);
 			}
 		);
 	}
 
-	changeLanguage(lang:string){
-		this.languageParam = lang;
+	changeLanguage(postId:number){
+		this.postLanguageId = postId;
 		this.postLoaded = false;
-		this.getPost(true,this.languageParam);
+		this.getPost(true,this.postLanguageId);
 	}
 
 	publishPost(postLanguageId,publish){
 		
 		this._postService.publishPost(this.token,publish,postLanguageId).subscribe(
 			response => {
-				this.getPost(false,this.languageParam);
+				this.getPost(false,this.postLanguageId);
 			},error => {
 				console.log(error);
 			}
@@ -270,14 +287,37 @@ export class PostEditComponent implements OnInit, OnDestroy {
 
 	showImageDetail(imageOnPostId){
 		this.activatedImage = imageOnPostId;
+		this.getImagesLanguage();
+	}
+
+	getImagesLanguage(){
+		this._imageService.getImagesLanguageOnImage(this.activatedImage,this.postLanguage.language_symbol,this.token)
+			.subscribe(
+				response => {
+					this.imagesLanguageOnSelected = response.images_language;
+				},error => {
+					console.log(error)
+				}
+		)
+	}
+
+	deleteImageLanguage(imageLanguageId:number){
+		this._imageService.deleteImageLanguage(imageLanguageId,this.token).subscribe(
+			response => {
+				this.getImagesLanguage();
+			},error =>{
+
+			}
+		)
 	}
 
 	submitImageLanguageDescription(imageId){
 		this._postService.saveImageLanguage(this.token,this.imageLanguageToSubmit,imageId).subscribe(
 			response => {
-				
+				this.imageLanguageToSubmit.description_language = "";
+				this.imageLanguageToSubmit.language_symbol = "";
 			},error => {
-
+				console.log(error);
 			}
 		)
 	}

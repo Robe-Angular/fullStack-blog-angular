@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/inicio']">
+        <a class="nav-link" [routerLink]="['/inicio']" i18n>
           Inicio
         </a>
       </li>
@@ -48,14 +48,14 @@
             {{ identity.name + ' ' + identity.surname}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/crear-entrada']">Crear entrada</a>
-            <a class="dropdown-item" [routerLink]="['/crear-categoria']">Crear Categoría</a>
-            <a class="dropdown-item" [routerLink]="['/administrar-categorias']">Administrar Categorías</a>
-            <a class="dropdown-item" [routerLink]="['/admin-posts']">Administrar posts</a>
+            <a class="dropdown-item" [routerLink]="['/crear-entrada']" i18n>Crear entrada</a>
+            <a class="dropdown-item" [routerLink]="['/crear-categoria']" i18n>Crear Categoría</a>
+            <a class="dropdown-item" [routerLink]="['/administrar-categorias']" i18n>Administrar Categorías</a>
+            <a class="dropdown-item" [routerLink]="['/admin-posts']" i18n>Administrar posts</a>
             <div class="dropdown-divider"></div>
             <!--<a class="dropdown-item" [routerLink]="['/perfil',identity.sub]">Mi perfil</a>-->
-            <a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a>
-            <a class="dropdown-item" [routerLink]="['/logout/1']">Salir</a>
+            <a class="dropdown-item" [routerLink]="['/ajustes']" i18n>Ajustes</a>
+            <a class="dropdown-item" [routerLink]="['/logout/1']" i18n>Salir</a>
           </div>
         </li>
         

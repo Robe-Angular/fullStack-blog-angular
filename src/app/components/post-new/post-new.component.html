@@ -1,42 +1,43 @@
 <div class="col-md-12 mt-3">
 	<h1>{{page_title}}</h1>
 
-	<p *ngIf="!isEdit">
+	<p *ngIf="!isEdit" i18n>
 		Añade un nuevo artículo al Blog
 	</p>
-	<p *ngIf="isEdit && post && postLoaded">
+	<p *ngIf="isEdit && post && postLoaded" i18n>
 		Modifica el post: {{post.title}}
 	</p>
 	<hr/>
 	<!--Mensajes de alerta-->
-	<div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+	<div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'" i18n>
 		Los datos se han guardado correctamente
 	</div>
-	<div class="alert alert-danger col-md-5" *ngIf="status == 'error'">
+	<div class="alert alert-danger col-md-5" *ngIf="status == 'error'" i18n>
 		Los datos no se han guardado
 	</div>
 	<div id="lang-selector" *ngIf="isEdit">
-		<div *ngFor="let lang of langs" class="lang">
+		
+		<div *ngFor="let postLanguageElement of postsLanguageOnPost" class="lang">
 			
-			<button data-toggle="modal" [class.language-selected]=" languageParam == lang "
+			<button data-toggle="modal" [class.language-selected]=" postLanguageId == postLanguageElement.id "
 			
-			 [attr.data-target]="'#myModal'+lang">{{lang}}</button>
+			 [attr.data-target]="'#myModal'+postLanguageElement.language_symbol">{{postLanguageElement.language_symbol}}</button>
 
-			<div class="modal fade" id="{{'myModal'+lang}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="{{'myModal'+postLanguageElement.language_symbol}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="{{'myModal'+lang}}">¿Seguro que quieres borrar esta entrada?</h5>
+							<h5 class="modal-title" id="{{'myModal'+lang}}" i18n>¿Seguro que quieres borrar esta entrada?</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div class="modal-body">
-							Vas a cambiar el idioma a {{lang}} podrías perder datos
+						<div class="modal-body" i18n>
+							Vas a cambiar el idioma a {{postLanguageElement.language_symbol}} podrías perder datos
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal">Close</button>
-							<a (click)="changeLanguage(lang)" class="btn btn-danger" data-dismiss="modal">Cambiar</a>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal" i18n>Close</button>
+							<a (click)="changeLanguage(postLanguageElement.id)" class="btn btn-danger" data-dismiss="modal" i18n>Cambiar</a>
 						</div>
 					</div>
 				</div>
@@ -50,19 +51,19 @@
 		*ngIf="postLoaded"
 	>
 		<div class="form-group" *ngIf="isEdit">
-			<label for="title">Título</label>
+			<label for="title" i18n>Título</label>
 			<input type="tex" name="title" #title="ngModel" [(ngModel)]="postLanguage.title_language" class="form-control" required>
-			<small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+			<small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block" i18n>
 				El título no es válido
 			</small>
 		</div>
 		<div *ngIf="isEdit">
-			<label for="content">Contenido</label>
+			<label for="content" i18n>Contenido</label>
 			<div id="editor-wrapper">
 				<div id="editor">
 					<ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"></ngx-editor-menu>
 					<ngx-editor [editor]="editor" name="content" #content="ngModel" [(ngModel)]="htmlDoc" required></ngx-editor>
-					<small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+					<small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block" i18n>
 						El contenido no es válido
 					</small>
 				</div>		
@@ -70,7 +71,7 @@
 			
 		</div>
 		<div class="form-group">
-			<label for="category_id">
+			<label for="category_id" i18n>
 				Categoría
 			</label>
 			<select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
@@ -80,7 +81,7 @@
 			</select>
 		</div>
 		<div class="form-group" *ngIf="isEdit && post.id">
-			<label for="image">Images</label>
+			<label for="image" i18n>Images</label>
 			<div *ngIf="isEdit">
 
 				<div *ngFor="let imageOnPost of imagesOnPost" class="imageOnPost">
@@ -88,31 +89,41 @@
 					<div class="clearfix">
 
 					</div>
-					<button type="button" class="btn btn-danger ml-2" (click)="deleteImage(imageOnPost.id)">
+					<button type="button" class="btn btn-danger ml-2" (click)="deleteImage(imageOnPost.id)" i18n>
 						Borrar
 					</button>
 
 					<button type="button" class="btn btn-primary ml-2" [class.btn-info]="imageOnPost.id==post.image" (click)="setMainImage(imageOnPost.id)">
 						M
 					</button>
-					<button type="button" class="btn btn-warning ml-2" (click)="submitDescription(imageOnPost.id,imageOnPost)">						
+					<button type="button" class="btn btn-warning ml-2" (click)="submitDescription(imageOnPost.id,imageOnPost)" i18n>						
 						Descripción
 					</button>
 					<input type="text" [(ngModel)]="imageOnPost.description" [ngModelOptions]="{standalone: true}"/>
 
-					<button type="button" class="btn btn-info ml-2" (click)="showImageDetail(imageOnPost.id)">
+					<button type="button" class="btn btn-info ml-2" (click)="showImageDetail(imageOnPost.id)" i18n>
 						Detalles
 					</button>
 					<div *ngIf="activatedImage == imageOnPost.id" class="ml-4">
-						<label for="descriptionLanguage">Descripción en Idioma</label>
+						<label for="descriptionLanguage" i18n>Descripción en Idioma</label>
 						<input type="text" name="descriptionLanguage" [(ngModel)]="imageLanguageToSubmit.description_language"/>
 
-						<label for="languageSymbol">Símbolo del idioma</label>
+						<label for="languageSymbol" i18n>Símbolo del idioma</label>
 						<input type="text" name="languageSymbol" [(ngModel)]="imageLanguageToSubmit.language_symbol"/>
 
-						<button type="button" class="btn btn-success ml-2" (click)="submitImageLanguageDescription(imageOnPost.id)">
+						<button type="button" class="btn btn-success ml-2" (click)="submitImageLanguageDescription(imageOnPost.id)" i18n>
 							Guardar
 						</button>
+
+						<div *ngFor="let imageLanguage of imagesLanguageOnSelected">
+							{{imageLanguage.description_language}} - {{imageLanguage.language_symbol}}
+							<button type="button" class="btn btn-danger ml-2" (click)="deleteImageLanguage(imageLanguage.id)" i18n>
+								Borrar
+							</button>
+						</div>
+						
+						
+
 					</div>
 
 
@@ -125,12 +136,12 @@
 					(ApiResponse)="imageUpload($event)">
 			</angular-file-uploader>
 		</div>
-		<input type="submit" value="Guardar" class="btn btn-success" [disabled]="postNew.invalid"/>
+		<input type="submit" i18n-value value="Guardar" class="btn btn-success" [disabled]="postNew.invalid"/>
 
-		<button type="button" class="btn btn-warning" (click)="publishPost(postLanguage.id,true)" *ngIf="!post.posts_language[0].published">
+		<button type="button" class="btn btn-warning" (click)="publishPost(postLanguage.id,true)" *ngIf="!postLanguage.published" i18n>
 			Publicar
 		</button>
-		<button type="button" class="btn btn-secondary" (click)="publishPost(postLanguage.id,false)" *ngIf="post.posts_language[0].published">
+		<button type="button" class="btn btn-secondary" (click)="publishPost(postLanguage.id,false)" *ngIf="postLanguage.published" i18n>
 			Ocultar
 		</button>
 
