@@ -5,11 +5,14 @@
 				<h3>
 					<a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">{{postLanguage.title_language | shortString : 65}}</a>
 					<div class="card-body">
+						
+
 						<!--Imagen-->
-						<div class="post-image w-100" *ngIf="postLanguage.post.image != null">
+						<div class="post-image w-100" *ngIf="postLanguage.post.image != null && postLanguage.post.image?.images_language.length > 0">
+							
 							<img src="{{url + 'post/image-language/' + postLanguage.post.image.images_language[0].description_language}}" class="w-100"/>
 						</div>
-						<div class="post-image w-100" *ngIf="postLanguage.post.image == null">
+						<div class="post-image w-100" *ngIf="postLanguage.post.image == null || postLanguage.post.image?.images_language.length == 0">
 							<img src="assets/images/default.jpg" alt="default image" class="w-100 h-200" height="200" />
 						</div>
 						<!--Botones de acción-->
