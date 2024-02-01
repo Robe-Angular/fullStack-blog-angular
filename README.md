@@ -1,6 +1,8 @@
 #Backend
 Laravel
 
+When submiting an image on a post, put a description and click on "description" button to save the description to the image on the DB, so lets the api found the image file. ;)
+
 # BlogAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
