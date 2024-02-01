@@ -137,13 +137,14 @@
 			</angular-file-uploader>
 		</div>
 		<input type="submit" i18n-value value="Guardar" class="btn btn-success" [disabled]="postNew.invalid"/>
-
-		<button type="button" class="btn btn-warning" (click)="publishPost(postLanguage.id,true)" *ngIf="!postLanguage.published" i18n>
-			Publicar
-		</button>
-		<button type="button" class="btn btn-secondary" (click)="publishPost(postLanguage.id,false)" *ngIf="postLanguage.published" i18n>
-			Ocultar
-		</button>
+		<ng-container *ngIf="postLanguage">
+			<button type="button" class="btn btn-warning" (click)="publishPost(postLanguage.id,true)" *ngIf="!postLanguage.published && postLanguage" i18n>
+				Publicar
+			</button>
+			<button type="button" class="btn btn-secondary" (click)="publishPost(postLanguage.id,false)" *ngIf="postLanguage.published && postLanguage" i18n>
+				Ocultar
+			</button>
+		</ng-container>
 
 		
 	</form>
