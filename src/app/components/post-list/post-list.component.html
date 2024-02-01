@@ -3,7 +3,7 @@
 		<article class="card">
 			<div class="card-header" >
 				<h3>
-					<a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">{{postLanguage.title_language | shortString : 12}}</a>
+					<a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">{{postLanguage.title_language | shortString : 65}}</a>
 					<div class="card-body">
 						<!--Imagen-->
 						<div class="post-image w-100" *ngIf="postLanguage.post.image != null">
