@@ -222,6 +222,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
 							this._postService.getImagesByPost(this.token,this.post.id).subscribe(
 								response =>{
 									this.imagesOnPost = response.images;
+									this.imagesLanguageOnSelected = [];
 								},error => {
 									this._router.navigate(['inicio']);
 								}
