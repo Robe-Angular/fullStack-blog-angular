@@ -7,5 +7,10 @@
 .post-content{
     display: inline-block;
     text-align: left;
+    
     width: 90%;
+}
+.inner-img {
+    max-width: 100%;
+    height: auto;
 }

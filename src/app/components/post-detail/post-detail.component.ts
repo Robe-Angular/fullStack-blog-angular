@@ -59,14 +59,19 @@ export class PostDetailComponent implements OnInit,AfterViewChecked {
 				response => {
 					if(response.status = 'success'){
 						console.log(response)
-						this.postLanguage = response.post;					
-
+						
+						this.postLanguage = response.post;
+						
 						this.postCategoryName = response.post.post.category.categories_language[0].name_language;
 						this.idSelected = this.postLanguage.id;
 						//FB.XFBML.parse(document.getElementById('post-container'));
 						this._postService.getpostsLanguageOnPost(this.postLanguage.post.id).subscribe(
 							response => {
+								let imgPattern = /<img/gi;
 								this.otherPostsLanguage = response.posts_language;
+								
+								this.postLanguage.content_language = this.postLanguage.content_language.replace(imgPattern,'<img style="max-width:100%" ');
+								//.replace(imgPattern,'<img class="inner-img" ')
 
 							},error => {
 								console.log(error);
