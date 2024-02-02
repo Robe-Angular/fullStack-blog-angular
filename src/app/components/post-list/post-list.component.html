@@ -2,60 +2,62 @@
 	<div *ngFor="let postLanguage of posts">	
 		<article class="card">
 			<div class="card-header" >
-				<h3>
-					<a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">{{postLanguage.title_language | shortString : 65}}</a>
-					<div class="card-body">
-						
-
-						<!--Imagen-->
-						<div class="post-image w-100" *ngIf="postLanguage.post.image != null && postLanguage.post.image?.images_language.length > 0">
+				
+					<h3><a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">{{postLanguage.title_language | shortString : 65}}</a></h3>
+					<a [routerLink]="['/posts',postLanguage.id, postLanguage.title_language | urlPostDescription ]">
+						<div class="card-body">
 							
-							<img src="{{url + 'post/image-language/' + postLanguage.post.image.images_language[0].description_language}}" class="w-100"/>
-						</div>
-						<div class="post-image w-100" *ngIf="postLanguage.post.image == null || postLanguage.post.image?.images_language.length == 0">
-							<img src="assets/images/default.jpg" alt="default image" class="w-100 h-200" height="200" />
-						</div>
-						<!--Botones de acción-->
-						<div class="post-buttons mt-3" *ngIf="panelAdmin">
-							<a [routerLink]="['/posts',postLanguage.id,postLanguage.title_language]" class="btn btn-success mr-2" i18n>Leer</a>
-							<span *ngIf="identity && identity.sub == 1">
-								<a [routerLink]="['/editar-entrada', postLanguage.id]" class="btn btn-warning mr-2" i18n>Editar</a>
 
-								<button type="button" class="btn btn-warning" (click)="publish(postLanguage.id,true)" *ngIf="!postLanguage.published" i18n>
-									Publicar
-								</button>
-								<button type="button" class="btn btn-secondary" (click)="publish(postLanguage.id,false)" *ngIf="postLanguage.published" i18n>
-									Ocultar
-								</button>
-								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal'+postLanguage.id" i18n>
-									Borrar
-								</button>
+							<!--Imagen-->
+							<div class="post-image w-100" *ngIf="postLanguage.post.image != null && postLanguage.post.image?.images_language.length > 0">
+								
+								<img src="{{url + 'post/image-language/' + postLanguage.post.image.images_language[0].description_language}}" class="w-100"/>
+							</div>
+							<div class="post-image w-100" *ngIf="postLanguage.post.image == null || postLanguage.post.image?.images_language.length == 0">
+								<img src="assets/images/default.jpg" alt="default image" class="w-100 h-200" height="200" />
+							</div>
+							<!--Botones de acción-->
+							<div class="post-buttons mt-3" *ngIf="panelAdmin">
+								<a [routerLink]="['/posts',postLanguage.id,postLanguage.title_language]" class="btn btn-success mr-2" i18n>Leer</a>
+								<span *ngIf="identity && identity.sub == 1">
+									<a [routerLink]="['/editar-entrada', postLanguage.id]" class="btn btn-warning mr-2" i18n>Editar</a>
 
-								<!-- Modal -->
-								<div class="modal fade" id="{{'myModal'+postLanguage.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="{{'myModal'+postLanguage.id}}" i18n>¿Seguro que quieres borrar esta entrada?</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body" i18n>
-												Vas a borrar definitivamente {{postLanguage.title_language}}
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal" i18n>Close</button>
-												<a (click)="deletePost(postLanguage.post.id)" class="btn btn-danger" data-dismiss="modal" i18n>Borrar</a>
+									<button type="button" class="btn btn-warning" (click)="publish(postLanguage.id,true)" *ngIf="!postLanguage.published" i18n>
+										Publicar
+									</button>
+									<button type="button" class="btn btn-secondary" (click)="publish(postLanguage.id,false)" *ngIf="postLanguage.published" i18n>
+										Ocultar
+									</button>
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal'+postLanguage.id" i18n>
+										Borrar
+									</button>
+
+									<!-- Modal -->
+									<div class="modal fade" id="{{'myModal'+postLanguage.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="{{'myModal'+postLanguage.id}}" i18n>¿Seguro que quieres borrar esta entrada?</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body" i18n>
+													Vas a borrar definitivamente {{postLanguage.title_language}}
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal btn-warning" data-dismiss="modal" i18n>Close</button>
+													<a (click)="deletePost(postLanguage.post.id)" class="btn btn-danger" data-dismiss="modal" i18n>Borrar</a>
+												</div>
 											</div>
 										</div>
-									</div>
-								</div>								 
-							</span>
+									</div>								 
+								</span>
+							</div>
 						</div>
-					</div>
-				</h3>
+					</a>
+				
 			</div>
 		</article>
 		
